@@ -1,0 +1,6 @@
+use_frameworks!
+target 'AppboosterSDK_Tests' do
+  pod 'AppboosterSDK', :path => '../'
+  
+  
+end
