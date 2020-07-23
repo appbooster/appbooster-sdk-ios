@@ -22,7 +22,38 @@ struct State {
     set(newValue) {
       if let data = try? JSONEncoder().encode(newValue) {
         UserDefaults.standard.set(data, forKey: #function)
-        UserDefaults.standard.synchronize()
+      }
+    }
+  }
+
+  static var debugTests: [AppboosterTest] {
+    get {
+      if let data = UserDefaults.standard.object(forKey: #function) as? Data,
+        let value = try? JSONDecoder().decode([AppboosterTest].self, from: data) {
+        return value
+      }
+
+      return []
+    }
+    set(newValue) {
+      if let data = try? JSONEncoder().encode(newValue) {
+        UserDefaults.standard.set(data, forKey: #function)
+      }
+    }
+  }
+
+  static var experiments: [AppboosterExperiment] {
+    get {
+      if let data = UserDefaults.standard.object(forKey: #function) as? Data,
+        let value = try? JSONDecoder().decode([AppboosterExperiment].self, from: data) {
+        return value
+      }
+
+      return []
+    }
+    set(newValue) {
+      if let data = try? JSONEncoder().encode(newValue) {
+        UserDefaults.standard.set(data, forKey: #function)
       }
     }
   }
