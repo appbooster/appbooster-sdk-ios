@@ -1,29 +1,69 @@
-# AppboosterSDK
+# appbooster-sdk-ios
 
-[![CI Status](https://img.shields.io/travis/VladimirKhuraskin/AppboosterSDK.svg?style=flat)](https://travis-ci.org/VladimirKhuraskin/AppboosterSDK)
-[![Version](https://img.shields.io/cocoapods/v/AppboosterSDK.svg?style=flat)](https://cocoapods.org/pods/AppboosterSDK)
-[![License](https://img.shields.io/cocoapods/l/AppboosterSDK.svg?style=flat)](https://cocoapods.org/pods/AppboosterSDK)
-[![Platform](https://img.shields.io/cocoapods/p/AppboosterSDK.svg?style=flat)](https://cocoapods.org/pods/AppboosterSDK)
-
-## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
+Framework for A/B testing.
 
 ## Installation
 
-AppboosterSDK is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+CocoaPods:
 
-```ruby
+```
 pod 'AppboosterSDK'
 ```
 
-## Author
+## Usage
 
-VladimirKhuraskin, khuraskin.dev@gmail.com
+```
+import AppboosterSDK
+```
 
-## License
+### Initialization:
 
-AppboosterSDK is available under the MIT license. See the LICENSE file for more info.
+```
+let ab = AppboosterAB(serverUrl: "<YOUR_APPBOOSTERSDK_SERVER_URL>", // optional, e.g. "https://new.apitapi.com"
+                   authToken: "<YOUR_APPBOOSTERSDK_AUTH_TOKEN>",
+                   deviceToken: "<YOUR_DEVICE_TOKEN")
+```
+
+### How to fetch known tests values that associated with your device?
+
+```
+ab.fetch(knownKeys: ["<TEST_1_KEY>", "<TEST_2_KEY>"],
+         timeoutInterval: 3.0, // optional
+         completion: { error in })
+```
+
+### How to get the value for a specific test?
+
+```
+let value: String? = ab["<TEST_KEY>"]
+```
+
+or
+
+```
+let value: String? = ab.value("<TEST_KEY>")
+```
+
+or
+
+```
+let value: String = ab.value("<TEST_KEY>", or: "<DEFAULT_VALUE>")
+```
+
+### How to get user properties for analytics?
+
+```
+let userProperties = ab.userProperties
+```
+
+### How to debug?
+
+```
+ab.showDebug = true // false by default, to print all debugging info in the console
+ab.log = { text in } // to define your own log handler
+let duration = ab.lastOperationDuration // the duration of the last operation in seconds
+```
+
+==================================================
+
+You can see the example of usage in the attached project.
