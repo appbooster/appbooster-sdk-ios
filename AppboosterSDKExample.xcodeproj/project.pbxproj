@@ -22,6 +22,7 @@
 		3E2EAFEE24C996BA001643BD /* ExperimentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EAFED24C996BA001643BD /* ExperimentsController.swift */; };
 		3E2EAFF024C9A4FA001643BD /* UIViewController+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EAFEF24C9A4FA001643BD /* UIViewController+Shake.swift */; };
 		3E2EAFF424CEBD9D001643BD /* JWTToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EAFF324CEBD9C001643BD /* JWTToken.swift */; };
+		3E2EAFF624CEDFAB001643BD /* AppboosterKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EAFF524CEDFAB001643BD /* AppboosterKeychain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		3E2EAFED24C996BA001643BD /* ExperimentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExperimentsController.swift; path = AppboosterSDK/Classes/ExperimentsController.swift; sourceTree = SOURCE_ROOT; };
 		3E2EAFEF24C9A4FA001643BD /* UIViewController+Shake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+Shake.swift"; path = "AppboosterSDK/Classes/UIViewController+Shake.swift"; sourceTree = SOURCE_ROOT; };
 		3E2EAFF324CEBD9C001643BD /* JWTToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JWTToken.swift; path = AppboosterSDK/Classes/JWTToken.swift; sourceTree = SOURCE_ROOT; };
+		3E2EAFF524CEDFAB001643BD /* AppboosterKeychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppboosterKeychain.swift; path = AppboosterSDK/Classes/AppboosterKeychain.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				3E2EAFDD24C96880001643BD /* AppboosterAB.swift */,
 				3E2EAFDF24C96880001643BD /* AppboosterABError.swift */,
 				3E2EAFEB24C98CF0001643BD /* AppboosterExperiment.swift */,
+				3E2EAFF524CEDFAB001643BD /* AppboosterKeychain.swift */,
 				3E2EAFE124C96880001643BD /* AppboosterTest.swift */,
 				3E2EAFED24C996BA001643BD /* ExperimentsController.swift */,
 				3E2EAFF324CEBD9C001643BD /* JWTToken.swift */,
@@ -189,6 +192,7 @@
 				3E2EAFE724C96880001643BD /* AppboosterTest.swift in Sources */,
 				3E269E2024C85170002C5608 /* ViewController.swift in Sources */,
 				3E2EAFE524C96880001643BD /* AppboosterABError.swift in Sources */,
+				3E2EAFF624CEDFAB001643BD /* AppboosterKeychain.swift in Sources */,
 				3E2EAFE624C96880001643BD /* API.swift in Sources */,
 				3E269E1C24C85170002C5608 /* AppDelegate.swift in Sources */,
 				3E2EAFE824C96880001643BD /* State.swift in Sources */,
