@@ -13,17 +13,20 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    let ab = AppboosterAB(authToken: "<APITAPI_AUTH_TOKEN>",
-                          deviceToken: "<DEVICE_TOKEN")
-    ab.fetch(knownKeys: ["<TEST_1_KEY>", "<TEST_2_KEY>"],
-             completion: { abError in
-              guard abError == nil else { return }
+    let ab = AppboosterAB(
+      authToken: "<APITAPI_AUTH_TOKEN>",
+      appId: "<APP_ID>",
+      deviceToken: "<DEVICE_TOKEN>",
+      defaults: ["<TEST_1_KEY>": "<TEST_1_DEFAULT_VALUE>"]
+    )
 
-              let test1Value: String? = ab.value("<TEST_1_KEY>")
-              let test2Value: Int = ab.value("<TEST_2_KEY>", or: 3)
+    ab.fetch() { abError in
+      guard abError == nil else { return }
 
-              print(test1Value ?? "", test2Value)
-    })
+      let test1Value: String? = ab.value("<TEST_1_KEY>")
+
+      print(test1Value ?? "")
+    }
   }
 
 }

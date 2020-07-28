@@ -10,7 +10,7 @@ import UIKit
 import Security
 
 
-internal struct AppboosterKeychain {
+struct AppboosterKeychain {
 
   private static let userAccount: NSString = "AppboosterUser"
   private static let deviceIdKey: NSString = "AppboosterDeviceID"
@@ -26,11 +26,7 @@ internal struct AppboosterKeychain {
   private static let kSecAttrAccessibleValue: NSString = NSString(format: kSecAttrAccessible)
   private static let kSecAttrAccessibleAfterFirstUnlockValue: NSString = NSString(format: kSecAttrAccessibleAfterFirstUnlock)
 
-  internal static func generateUUID() -> String {
-    return UUID().uuidString
-  }
-
-  internal static func getDeviceID() -> String? {
+  static func getDeviceToken() -> String? {
     let keychainQuery: NSMutableDictionary = NSMutableDictionary(
       objects: [kSecClassGenericPasswordValue, deviceIdKey, userAccount, kCFBooleanTrue!, kSecMatchLimitOneValue],
       forKeys: [kSecClassValue, kSecAttrServiceValue, kSecAttrAccountValue, kSecReturnDataValue, kSecMatchLimitValue]
@@ -49,8 +45,10 @@ internal struct AppboosterKeychain {
     return contentsOfKeychain
   }
 
-  internal static func setDeviceID(deviceID: String) {
-    if let dataFromString = deviceID.data(using: .utf8, allowLossyConversion: false) {
+  static func setNewDeviceToken() -> String {
+    let deviceId: String = UUID().uuidString
+
+    if let dataFromString = deviceId.data(using: .utf8, allowLossyConversion: false) {
       let keychainQuery: NSMutableDictionary = [
         kSecClassValue: kSecClassGenericPasswordValue,
         kSecAttrServiceValue: deviceIdKey,
@@ -62,5 +60,7 @@ internal struct AppboosterKeychain {
       SecItemDelete(keychainQuery as CFDictionary)
       SecItemAdd(keychainQuery as CFDictionary, nil)
     }
+
+    return deviceId
   }
 }

@@ -9,19 +9,36 @@
 import UIKit
 import AdSupport
 
-// TODO: replace
-private let defaultServerUrl: String = "https://new.apitapi.com"
-
 public final class AppboosterAB: NSObject {
 
-  private let serverUrl: String
+  // TODO: replace serverUrl
+  private let serverUrl: String = "https://new.apitapi.com"
   private let authToken: String
   private let deviceToken: String
+  private let appId: String
+  private let knownKeys: [String]
 
-  public init(serverUrl: String? = nil, authToken: String, deviceToken: String) {
-    self.serverUrl = serverUrl ?? defaultServerUrl
+  public var debugMode: Bool = false
+
+  public init(
+    authToken: String,
+    appId: String,
+    deviceToken: String? = nil,
+    defaults: [String: Any]
+  ) {
     self.authToken = authToken
-    self.deviceToken = deviceToken
+    self.appId = appId
+    self.knownKeys = Array(defaults.keys)
+
+    defaultTests = defaults.compactMap { key, value in
+      AppboosterTest(key: key, value: value as? AnyCodable ?? "")
+    }
+
+    if let deviceToken = deviceToken {
+      self.deviceToken = deviceToken
+    } else {
+      self.deviceToken = AppboosterKeychain.getDeviceToken() ?? AppboosterKeychain.setNewDeviceToken()
+    }
 
     super.init()
   }
@@ -31,14 +48,21 @@ public final class AppboosterAB: NSObject {
       State.tests = tests
     }
   }
+  private var defaultTests: [AppboosterTest] = State.defaultTests {
+    didSet {
+      State.defaultTests = tests
+    }
+  }
+  private var debugTests: [AppboosterTest] {
+    return State.debugTests
+  }
 
   public var showDebug: Bool = false
   public var log: ((String) -> Void)?
 
   public var lastOperationDuration: TimeInterval = 0.0
 
-  public func fetch(knownKeys: [String],
-                    timeoutInterval: TimeInterval = 3.0,
+  public func fetch(timeoutInterval: TimeInterval = 3.0,
                     completion: @escaping (_ abError: AppboosterABError?) -> Void) {
     let urlPath = [serverUrl, API.modifier, "\(API.versionModifier)\(API.version)", API.path]
       .joined(separator: "/")
@@ -61,6 +85,7 @@ public final class AppboosterAB: NSObject {
       "Content-Type": "application/json",
       "Authorization": authToken,
       "DeviceToken": deviceToken,
+      "AppId": appId,
       "AppVersion": Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
     ]
 
@@ -83,6 +108,7 @@ public final class AppboosterAB: NSObject {
                   let tests = try JSONDecoder().decode([AppboosterTest].self, from: data)
 
                   self.tests = tests
+//                  self.debugMode =
 
                   completion(nil)
                 }
@@ -101,15 +127,14 @@ public final class AppboosterAB: NSObject {
   // MARK: Getters
 
   public func value<T>(_ key: String) -> T? {
-    return tests.filter({ $0.key == key }).first?.value.value as? T
-  }
-
-  public func value<T>(_ key: String, or: T) -> T {
-    return value(key) ?? or
-  }
-
-  public subscript<T>(key: String) -> T? {
-    return value(key)
+    if debugMode {
+      return debugTests.filter({ $0.key == key }).first?.value.value as? T
+        ?? tests.filter({ $0.key == key }).first?.value.value as? T
+        ?? defaultTests.filter({ $0.key == key }).first?.value.value as? T
+    } else {
+      return tests.filter({ $0.key == key }).first?.value.value as? T
+        ?? defaultTests.filter({ $0.key == key }).first?.value.value as? T
+    }
   }
 
   public var userProperties: [String: Any] {
