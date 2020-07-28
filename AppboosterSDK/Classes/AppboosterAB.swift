@@ -62,15 +62,36 @@ public final class AppboosterAB: NSObject {
 
   public func fetch(timeoutInterval: TimeInterval = 3.0,
                     completion: @escaping (_ abError: AppboosterABError?) -> Void) {
+    fetchTests(timeoutInterval: timeoutInterval, completion: completion)
+    fetchAllExperiments(timeoutInterval: timeoutInterval)
+  }
+
+  private func createUrl(path: String) -> URL? {
     let urlPath = [serverUrl, API.modifier, API.type, API.path]
       .joined(separator: "/")
 
     var urlComponents = URLComponents(string: urlPath)
     urlComponents?.queryItems = knownKeys.map({ URLQueryItem(name: "knownKeys[]", value: $0) })
 
-    guard let url = urlComponents?.url else {
-      let abError = AppboosterABError(error: "Invalid url",
-                                   code: 0)
+    return urlComponents?.url
+  }
+
+  private func createHeaders() -> [String: String] {
+    let token = JWTToken.generate(deviceId: deviceId, sdkToken: sdkToken) ?? ""
+    let headers = [
+      "Content-Type": "application/json",
+      "Authorization": "Bearer \(token)",
+      "SDK-App-ID": appId,
+      "AppVersion": Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
+    ]
+
+    return headers
+  }
+
+  private func fetchTests(timeoutInterval: TimeInterval,
+                          completion: @escaping (_ abError: AppboosterABError?) -> Void) {
+    guard let url = createUrl(path: API.path) else {
+      let abError = AppboosterABError(error: "Invalid url", code: 0)
 
       debugAndLog("[AppboosterAB] Error – \(abError.error), error code: \(abError.code)")
 
@@ -79,21 +100,12 @@ public final class AppboosterAB: NSObject {
       return
     }
 
-    let token = JWTToken.generate(deviceId: deviceId, sdkToken: sdkToken) ?? ""
-
-    let headers = [
-      "Content-Type": "application/json",
-      "Authorization": "Bearer \(token)",
-      "SDK-App-ID": appId,
-      "AppVersion": Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
-    ]
-
+    let headers = createHeaders()
     let startDate = Date()
 
     API.get(url,
             headers: headers,
-            timeoutInterval: timeoutInterval,
-            completion: { [weak self] data, abError in
+            timeoutInterval: timeoutInterval) { [weak self] data, abError in
               guard let self = self else { return }
 
               self.lastOperationDuration = Date().timeIntervalSince(startDate)
@@ -120,7 +132,41 @@ public final class AppboosterAB: NSObject {
                   completion(abError)
                 }
               }
-    })
+    }
+  }
+
+  private func fetchAllExperiments(timeoutInterval: TimeInterval) {
+    guard let url = createUrl(path: API.optionsPath) else {
+      let abError = AppboosterABError(error: "Invalid url", code: 0)
+
+      debugAndLog("[AppboosterAB] Fetch all experiments error – \(abError.error), error code: \(abError.code)")
+
+      return
+    }
+
+    let headers = createHeaders()
+
+    API.get(url,
+            headers: headers,
+            timeoutInterval: timeoutInterval) { [weak self] data, abError in
+              guard let self = self else { return }
+
+              if let abError = abError {
+                self.debugAndLog("[AppboosterAB] Fetch all experiments error – \(abError.error), error code: \(abError.code)")
+              } else if let data = data {
+                do {
+                  let experiments = try JSONDecoder().decode([AppboosterExperiment].self, from: data)
+
+                  State.experiments = experiments
+                }
+                catch {
+                  let abError = AppboosterABError(error: "Tests decoding error: \(error.localizedDescription)",
+                    code: 0)
+
+                  self.debugAndLog("[AppboosterAB] Fetch all experiments error – \(abError.error), error code: \(abError.code)")
+                }
+              }
+    }
   }
 
   // MARK: Getters

@@ -11,12 +11,11 @@ import UIKit
 
 public struct AppboosterDebugMode {
 
-  static var isOn: Bool = false
-
+  public static var isOn: Bool = false
   public static var usingShake: Bool = true
 
   public static func showDebugMenu(from viewController: UIViewController) {
-    let controller = UINavigationController(rootViewController: ExperimentsController())
-    viewController.present(controller, animated: true)
+    let experimentsController = UINavigationController(rootViewController: ExperimentsController())
+    viewController.present(experimentsController, animated: true)
   }
 }

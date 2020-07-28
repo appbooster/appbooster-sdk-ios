@@ -31,8 +31,6 @@ class ExperimentsController: UITableViewController {
 
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
     tableView.tableFooterView = UIView(frame: .zero)
-
-    loadData()
   }
 
   // MARK: UITableViewDataSource
@@ -89,10 +87,6 @@ class ExperimentsController: UITableViewController {
   @objc
   private func close() {
     dismiss(animated: true)
-  }
-
-  private func loadData() {
-    // TODO
   }
 
   private func getSelectedIndexPaths() -> [IndexPath] {
