@@ -67,7 +67,7 @@ public final class AppboosterAB: NSObject {
   }
 
   private func createUrl(path: String) -> URL? {
-    let urlPath = [serverUrl, API.modifier, API.type, API.path]
+    let urlPath = [serverUrl, API.modifier, API.type, path]
       .joined(separator: "/")
 
     var urlComponents = URLComponents(string: urlPath)
