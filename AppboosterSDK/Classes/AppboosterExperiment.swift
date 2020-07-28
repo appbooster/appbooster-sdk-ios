@@ -9,6 +9,7 @@
 import Foundation
 
 struct AppboosterExperiment: Codable {
+  let name: String
   let key: String
-  let values: [AnyCodable]
+  let options: [AppboosterExperimentOption]
 }

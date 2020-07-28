@@ -9,24 +9,24 @@
 import UIKit
 import AdSupport
 
+var abDebugMode: Bool = false
+
 public final class AppboosterAB: NSObject {
 
   // TODO: replace serverUrl
-  private let serverUrl: String = "https://new.apitapi.com"
-  private let authToken: String
-  private let deviceToken: String
+  private let serverUrl: String = "https://api.appbooster.com"
+  private let sdkToken: String
   private let appId: String
+  private let deviceId: String
   private let knownKeys: [String]
 
-  public var debugMode: Bool = false
-
   public init(
-    authToken: String,
+    sdkToken: String,
     appId: String,
-    deviceToken: String? = nil,
+    deviceId: String? = nil,
     defaults: [String: Any]
   ) {
-    self.authToken = authToken
+    self.sdkToken = sdkToken
     self.appId = appId
     self.knownKeys = Array(defaults.keys)
 
@@ -34,10 +34,10 @@ public final class AppboosterAB: NSObject {
       AppboosterTest(key: key, value: value as? AnyCodable ?? "")
     }
 
-    if let deviceToken = deviceToken {
-      self.deviceToken = deviceToken
+    if let deviceId = deviceId {
+      self.deviceId = deviceId
     } else {
-      self.deviceToken = AppboosterKeychain.getDeviceToken() ?? AppboosterKeychain.setNewDeviceToken()
+      self.deviceId = AppboosterKeychain.getDeviceId() ?? AppboosterKeychain.setNewDeviceId()
     }
 
     super.init()
@@ -64,7 +64,7 @@ public final class AppboosterAB: NSObject {
 
   public func fetch(timeoutInterval: TimeInterval = 3.0,
                     completion: @escaping (_ abError: AppboosterABError?) -> Void) {
-    let urlPath = [serverUrl, API.modifier, "\(API.versionModifier)\(API.version)", API.path]
+    let urlPath = [serverUrl, API.modifier, API.type, API.path]
       .joined(separator: "/")
 
     var urlComponents = URLComponents(string: urlPath)
@@ -81,11 +81,12 @@ public final class AppboosterAB: NSObject {
       return
     }
 
+    let token = JWTToken.generate(deviceId: deviceId, sdkToken: sdkToken) ?? ""
+
     let headers = [
       "Content-Type": "application/json",
-      "Authorization": authToken,
-      "DeviceToken": deviceToken,
-      "AppId": appId,
+      "Authorization": "Bearer \(token)",
+      "SDK-App-ID": appId,
       "AppVersion": Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
     ]
 
@@ -105,10 +106,10 @@ public final class AppboosterAB: NSObject {
                 completion(abError)
               } else if let data = data {
                 do {
-                  let tests = try JSONDecoder().decode([AppboosterTest].self, from: data)
+                  let testsResponse = try JSONDecoder().decode(AppboosterTestResponse.self, from: data)
 
-                  self.tests = tests
-//                  self.debugMode =
+                  self.tests = testsResponse.experiments
+                  abDebugMode = testsResponse.debug
 
                   completion(nil)
                 }
@@ -127,7 +128,7 @@ public final class AppboosterAB: NSObject {
   // MARK: Getters
 
   public func value<T>(_ key: String) -> T? {
-    if debugMode {
+    if abDebugMode {
       return debugTests.filter({ $0.key == key }).first?.value.value as? T
         ?? tests.filter({ $0.key == key }).first?.value.value as? T
         ?? defaultTests.filter({ $0.key == key }).first?.value.value as? T

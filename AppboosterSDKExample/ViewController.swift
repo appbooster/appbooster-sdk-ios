@@ -14,9 +14,8 @@ class ViewController: UIViewController {
     super.viewDidLoad()
 
     let ab = AppboosterAB(
-      authToken: "<APITAPI_AUTH_TOKEN>",
-      appId: "<APP_ID>",
-      deviceToken: "<DEVICE_TOKEN>",
+      sdkToken: "<YOUR_SDK_TOKEN>",
+      appId: "<YOUR_APP_ID>",
       defaults: ["<TEST_1_KEY>": "<TEST_1_DEFAULT_VALUE>"]
     )
 

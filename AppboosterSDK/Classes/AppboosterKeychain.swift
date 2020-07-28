@@ -9,7 +9,6 @@
 import UIKit
 import Security
 
-
 struct AppboosterKeychain {
 
   private static let userAccount: NSString = "AppboosterUser"
@@ -26,7 +25,7 @@ struct AppboosterKeychain {
   private static let kSecAttrAccessibleValue: NSString = NSString(format: kSecAttrAccessible)
   private static let kSecAttrAccessibleAfterFirstUnlockValue: NSString = NSString(format: kSecAttrAccessibleAfterFirstUnlock)
 
-  static func getDeviceToken() -> String? {
+  static func getDeviceId() -> String? {
     let keychainQuery: NSMutableDictionary = NSMutableDictionary(
       objects: [kSecClassGenericPasswordValue, deviceIdKey, userAccount, kCFBooleanTrue!, kSecMatchLimitOneValue],
       forKeys: [kSecClassValue, kSecAttrServiceValue, kSecAttrAccountValue, kSecReturnDataValue, kSecMatchLimitValue]
@@ -45,7 +44,7 @@ struct AppboosterKeychain {
     return contentsOfKeychain
   }
 
-  static func setNewDeviceToken() -> String {
+  static func setNewDeviceId() -> String {
     let deviceId: String = UUID().uuidString
 
     if let dataFromString = deviceId.data(using: .utf8, allowLossyConversion: false) {

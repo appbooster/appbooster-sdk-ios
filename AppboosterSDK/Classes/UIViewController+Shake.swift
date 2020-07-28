@@ -15,8 +15,7 @@ extension UIViewController {
   }
 
   override open func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-    // TODO: Add checking server flag
-    if motion == .motionShake {
+    if abDebugMode && motion == .motionShake {
       let controller = UINavigationController(rootViewController: ExperimentsController())
       present(controller, animated: true)
     }

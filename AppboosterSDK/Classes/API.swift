@@ -11,9 +11,9 @@ import Foundation
 struct API {
 
   static let modifier: String = "api"
-  static let versionModifier: String = "v"
-  static let version: Int = 1
+  static let type: String = "mobile"
   static let path: String = "experiments"
+  static let optionsPath: String = "experiments/options"
 
   static func get(_ url: URL,
                   headers: [String: String]?,

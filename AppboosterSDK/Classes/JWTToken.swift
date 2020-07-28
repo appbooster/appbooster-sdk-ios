@@ -12,7 +12,7 @@ import CommonCrypto
 public struct JWTToken {
 
   public static func generate(
-    sdkId: String,
+    deviceId: String,
     sdkToken: String
   ) -> String? {
     let header: [String: Any] = [
@@ -20,7 +20,7 @@ public struct JWTToken {
       "typ": "JWT"
     ]
     let payload: [String: Any] = [
-      "sdkId": sdkId
+      "deviceId": deviceId
     ]
 
     guard let jsonHeader = try? JSONSerialization.data(withJSONObject: header, options: []),

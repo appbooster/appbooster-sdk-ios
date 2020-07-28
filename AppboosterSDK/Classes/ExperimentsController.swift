@@ -48,13 +48,13 @@ class ExperimentsController: UITableViewController {
 
   override func tableView(_ tableView: UITableView,
                           numberOfRowsInSection section: Int) -> Int {
-    return experiments[section].values.count
+    return experiments[section].options.count
   }
 
   override func tableView(_ tableView: UITableView,
                           cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-    cell.textLabel?.text = "\(experiments[indexPath.section].values[indexPath.row])"
+    cell.textLabel?.text = "\(experiments[indexPath.section].options[indexPath.row])"
     cell.accessoryType = selectedIndexPaths.contains(indexPath) ? .checkmark : .none
 
     return cell
@@ -68,7 +68,7 @@ class ExperimentsController: UITableViewController {
     if let index = State.debugTests.firstIndex(where: { test in test.key == experiment.key }) {
       State.debugTests.remove(at: index)
     }
-    let test = AppboosterTest(key: experiment.key, value: experiment.values[indexPath.row])
+    let test = AppboosterTest(key: experiment.key, value: experiment.options[indexPath.row].key)
     State.debugTests.append(test)
 
     tableView.deselectRow(at: indexPath, animated: true)
@@ -103,11 +103,11 @@ class ExperimentsController: UITableViewController {
 
     for (index, experiment) in experiments.enumerated() {
       if let test = State.debugTests.first(where: { test in test.key == experiment.key }),
-        let experimentRow = experiment.values.firstIndex(where: { value in value == test.value }) {
+        let experimentRow = experiment.options.firstIndex(where: { option in option.key == test.value }) {
         section = index
         row = experimentRow
       } else if let test = State.tests.first(where: { test in test.key == experiment.key }),
-        let experimentRow = experiment.values.firstIndex(where: { value in value == test.value }) {
+        let experimentRow = experiment.options.firstIndex(where: { option in option.key == test.value }) {
         section = index
         row = experimentRow
       }
