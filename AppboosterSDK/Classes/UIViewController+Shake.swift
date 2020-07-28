@@ -14,10 +14,12 @@ extension UIViewController {
     return true
   }
 
-  override open func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-    if abDebugMode && motion == .motionShake {
-      let controller = UINavigationController(rootViewController: ExperimentsController())
-      present(controller, animated: true)
+  override open func motionEnded(_ motion: UIEvent.EventSubtype,
+                                 with event: UIEvent?) {
+    if AppboosterDebugMode.isOn &&
+      AppboosterDebugMode.usingShake &&
+      motion == .motionShake {
+      AppboosterDebugMode.showDebugMenu(from: self)
     }
   }
 

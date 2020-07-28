@@ -9,8 +9,6 @@
 import UIKit
 import AdSupport
 
-var abDebugMode: Bool = false
-
 public final class AppboosterAB: NSObject {
 
   // TODO: replace serverUrl
@@ -109,7 +107,7 @@ public final class AppboosterAB: NSObject {
                   let testsResponse = try JSONDecoder().decode(AppboosterTestResponse.self, from: data)
 
                   self.tests = testsResponse.experiments
-                  abDebugMode = testsResponse.debug
+                  AppboosterDebugMode.isOn = testsResponse.debug
 
                   completion(nil)
                 }
@@ -128,7 +126,7 @@ public final class AppboosterAB: NSObject {
   // MARK: Getters
 
   public func value<T>(_ key: String) -> T? {
-    if abDebugMode {
+    if AppboosterDebugMode.isOn {
       return debugTests.filter({ $0.key == key }).first?.value.value as? T
         ?? tests.filter({ $0.key == key }).first?.value.value as? T
         ?? defaultTests.filter({ $0.key == key }).first?.value.value as? T
