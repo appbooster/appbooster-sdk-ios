@@ -27,6 +27,7 @@
 		3E2EAFFA24CFFE3D001643BD /* AppboosterTestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EAFF924CFFE3D001643BD /* AppboosterTestResponse.swift */; };
 		3E2EAFFC24D01DB5001643BD /* AppboosterDebugMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EAFFB24D01DB5001643BD /* AppboosterDebugMode.swift */; };
 		3E2EB00D24D068D5001643BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E2EB00C24D068D5001643BD /* Assets.xcassets */; };
+		3E2EB00F24D16F06001643BD /* AppboosterExperimentsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EB00E24D16F05001643BD /* AppboosterExperimentsResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		3E2EAFF924CFFE3D001643BD /* AppboosterTestResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppboosterTestResponse.swift; path = AppboosterSDK/Classes/AppboosterTestResponse.swift; sourceTree = SOURCE_ROOT; };
 		3E2EAFFB24D01DB5001643BD /* AppboosterDebugMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppboosterDebugMode.swift; path = AppboosterSDK/Classes/AppboosterDebugMode.swift; sourceTree = SOURCE_ROOT; };
 		3E2EB00C24D068D5001643BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = AppboosterSDK/Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		3E2EB00E24D16F05001643BD /* AppboosterExperimentsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppboosterExperimentsResponse.swift; path = AppboosterSDK/Classes/AppboosterExperimentsResponse.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				3E2EAFFB24D01DB5001643BD /* AppboosterDebugMode.swift */,
 				3E2EAFEB24C98CF0001643BD /* AppboosterExperiment.swift */,
 				3E2EAFF724CFFE33001643BD /* AppboosterExperimentOption.swift */,
+				3E2EB00E24D16F05001643BD /* AppboosterExperimentsResponse.swift */,
 				3E2EAFF524CEDFAB001643BD /* AppboosterKeychain.swift */,
 				3E2EAFE124C96880001643BD /* AppboosterTest.swift */,
 				3E2EAFF924CFFE3D001643BD /* AppboosterTestResponse.swift */,
@@ -204,6 +207,7 @@
 				3E2EAFE424C96880001643BD /* AnyCodable.swift in Sources */,
 				3E2EAFF824CFFE33001643BD /* AppboosterExperimentOption.swift in Sources */,
 				3E2EAFFC24D01DB5001643BD /* AppboosterDebugMode.swift in Sources */,
+				3E2EB00F24D16F06001643BD /* AppboosterExperimentsResponse.swift in Sources */,
 				3E2EAFEC24C98CF0001643BD /* AppboosterExperiment.swift in Sources */,
 				3E2EAFE724C96880001643BD /* AppboosterTest.swift in Sources */,
 				3E269E2024C85170002C5608 /* ViewController.swift in Sources */,

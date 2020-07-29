@@ -1,5 +1,5 @@
 //
-//  AppboosterExperimentOption.swift
+//  AppboosterExperimentResponse.swift
 //  AppboosterSDK
 //
 //  Created by Appbooster on 22/07/2020.
@@ -8,7 +8,6 @@
 
 import Foundation
 
-struct AppboosterExperimentOption: Codable {
-  let value: AnyCodable
-  let description: String
+struct AppboosterExperimentsResponse: Codable {
+  let experiments: [AppboosterExperiment]
 }

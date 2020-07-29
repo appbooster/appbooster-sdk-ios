@@ -18,7 +18,7 @@ class ExperimentCell: UITableViewCell {
 
   func configure(_ option: AppboosterExperimentOption) {
     descriptionLabel.text = option.description
-    keyLabel.text = "\(option.key)"
+    keyLabel.text = "\(option.value)"
 //    currentLabel.isHidden = true
   }
 
@@ -148,7 +148,7 @@ class ExperimentsController: UITableViewController {
     if let index = State.debugTests.firstIndex(where: { test in test.key == experiment.key }) {
       State.debugTests.remove(at: index)
     }
-    let test = AppboosterTest(key: experiment.key, value: experiment.options[indexPath.row].key)
+    let test = AppboosterTest(key: experiment.key, value: experiment.options[indexPath.row].value)
     State.debugTests.append(test)
 
     tableView.deselectRow(at: indexPath, animated: true)
@@ -300,11 +300,11 @@ class ExperimentsController: UITableViewController {
 
     for (index, experiment) in experiments.enumerated() {
       if let test = State.debugTests.first(where: { test in test.key == experiment.key }),
-        let experimentRow = experiment.options.firstIndex(where: { option in option.key == test.value }) {
+        let experimentRow = experiment.options.firstIndex(where: { option in option.value == test.value }) {
         section = index
         row = experimentRow
       } else if let test = State.tests.first(where: { test in test.key == experiment.key }),
-        let experimentRow = experiment.options.firstIndex(where: { option in option.key == test.value }) {
+        let experimentRow = experiment.options.firstIndex(where: { option in option.value == test.value }) {
         section = index
         row = experimentRow
       }
