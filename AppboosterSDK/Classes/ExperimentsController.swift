@@ -58,6 +58,7 @@ class ExperimentCell: UITableViewCell {
     descriptionLabel = UILabel()
     descriptionLabel.textColor = .black
     descriptionLabel.font = .systemFont(ofSize: 17)
+    descriptionLabel.numberOfLines = 0
     stackView.addArrangedSubview(descriptionLabel)
 
     keyLabel = UILabel()
@@ -77,6 +78,8 @@ class ExperimentsController: UITableViewController {
 
   private let controllerTitle: String = "A/B-tests"
   private let tableTitle: String = "In debug mode, you can:\n1. See all available experiments for this app build\n2. View all options as users see them.\n\nAVAILABLE EXPERIMENTS"
+  private let reloadTitle: String = "The app will be closed."
+  private let resetTitle: String = "Debug experiment values will be cleaned up and the app closed."
   private let backgroundColor: UIColor = UIColor(red: 237/255, green: 237/255, blue: 241/255, alpha: 1)
   private let black20: UIColor = UIColor.black.withAlphaComponent(0.2)
   private let black40: UIColor = UIColor.black.withAlphaComponent(0.4)
@@ -100,7 +103,6 @@ class ExperimentsController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    addCloseButton()
     configureNavigationBar()
     configureTableView()
     configureTableViewHeaderView()
@@ -193,13 +195,26 @@ class ExperimentsController: UITableViewController {
 
   // MARK: Private Methods
 
-  private func addCloseButton() {
+  private func addNavigationBarButtons() {
     navigationItem.leftBarButtonItem = UIBarButtonItem(
       title: "Close",
       style: .plain,
       target: self,
       action: #selector(close)
     )
+    let resetButton = UIBarButtonItem(
+      title: "Reset",
+      style: .plain,
+      target: self,
+      action: #selector(reset)
+    )
+    let reloadButton = UIBarButtonItem(
+      title: "Reload",
+      style: .done,
+      target: self,
+      action: #selector(reload)
+    )
+    navigationItem.rightBarButtonItems = [reloadButton, resetButton]
   }
 
   @objc
@@ -207,7 +222,43 @@ class ExperimentsController: UITableViewController {
     dismiss(animated: true)
   }
 
+  @objc
+  private func reset() {
+    showActionSheet(
+      title: resetTitle,
+      actionTitle: "Reset"
+    ) { _ in
+      State.debugTests.removeAll()
+      exit(0)
+    }
+  }
+
+  @objc
+  private func reload() {
+    showActionSheet(
+      title: reloadTitle,
+      actionTitle: "Reload"
+    ) { _ in
+      exit(0)
+    }
+  }
+
+  private func showActionSheet(
+    title: String? = nil,
+    message: String? = nil,
+    actionTitle: String,
+    handler: ((UIAlertAction) -> Void)? = nil
+  ) {
+    let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+    let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+    let action = UIAlertAction(title: actionTitle, style: .default, handler: handler)
+    alertController.addAction(cancel)
+    alertController.addAction(action)
+    present(alertController, animated: true)
+  }
+
   private func configureNavigationBar() {
+    addNavigationBarButtons()
     title = controllerTitle
     navigationController?.navigationBar.prefersLargeTitles = true
     navigationController?.navigationBar.backgroundColor = .white
