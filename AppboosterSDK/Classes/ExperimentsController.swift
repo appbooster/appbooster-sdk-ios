@@ -8,6 +8,16 @@
 
 import UIKit
 
+private let controllerTitle: String = "A/B-tests"
+private let tableTitle: String = "In debug mode, you can:\n1. See all available experiments for this app build\n2. View all options as users see them.\n\nAVAILABLE EXPERIMENTS"
+private let reloadTitle: String = "The app will be closed."
+private let resetTitle: String = "Debug experiment values will be cleaned up and the app closed."
+private let currentOption: String = "Current option"
+private let backgroundColor: UIColor = UIColor(red: 237/255, green: 237/255, blue: 241/255, alpha: 1)
+private let blue: UIColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
+private let black20: UIColor = UIColor.black.withAlphaComponent(0.2)
+private let black40: UIColor = UIColor.black.withAlphaComponent(0.4)
+
 class ExperimentCell: UITableViewCell {
 
   private var checkImageView: UIImageView!
@@ -32,7 +42,6 @@ class ExperimentCell: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
 
     checkImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
-    checkImageView.image = UIImage(named: "checkbox")
     contentView.addSubview(checkImageView)
     checkImageView.translatesAutoresizingMaskIntoConstraints = false
     checkImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
@@ -50,8 +59,8 @@ class ExperimentCell: UITableViewCell {
     stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12).isActive = true
 
     currentLabel = UILabel()
-    currentLabel.text = "Current option"
-    currentLabel.textColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
+    currentLabel.text = currentOption
+    currentLabel.textColor = blue
     currentLabel.font = .systemFont(ofSize: 13)
     stackView.addArrangedSubview(currentLabel)
 
@@ -62,7 +71,7 @@ class ExperimentCell: UITableViewCell {
     stackView.addArrangedSubview(descriptionLabel)
 
     keyLabel = UILabel()
-    keyLabel.textColor = UIColor.black.withAlphaComponent(0.4)
+    keyLabel.textColor = black40
     keyLabel.font = .systemFont(ofSize: 13)
     stackView.addArrangedSubview(keyLabel)
   }
@@ -74,29 +83,16 @@ class ExperimentCell: UITableViewCell {
 
 class ExperimentsController: UITableViewController {
 
-  // MARK: - Constants
-
-  private let controllerTitle: String = "A/B-tests"
-  private let tableTitle: String = "In debug mode, you can:\n1. See all available experiments for this app build\n2. View all options as users see them.\n\nAVAILABLE EXPERIMENTS"
-  private let reloadTitle: String = "The app will be closed."
-  private let resetTitle: String = "Debug experiment values will be cleaned up and the app closed."
-  private let backgroundColor: UIColor = UIColor(red: 237/255, green: 237/255, blue: 241/255, alpha: 1)
-  private let black20: UIColor = UIColor.black.withAlphaComponent(0.2)
-  private let black40: UIColor = UIColor.black.withAlphaComponent(0.4)
-
   // MARK: - Private Properties
 
   private var experiments: [AppboosterExperiment] = State.experiments {
     didSet {
       State.experiments = experiments
-      selectedIndexPaths = getSelectedIndexPaths()
     }
   }
-  private var selectedIndexPaths: [IndexPath] = []
   private var arrows: [UIImageView] = []
-  private var experimentsObserver: NSObjectProtocol?
-
   private var hiddenSections: Set<Int> = []
+  private var experimentsObserver: NSObjectProtocol?
 
   // MARK: UITableViewController
 
@@ -124,8 +120,8 @@ class ExperimentsController: UITableViewController {
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
 
-    if let userProgressObserver = experimentsObserver {
-      NotificationCenter.default.removeObserver(userProgressObserver)
+    if let experimentsObserver = experimentsObserver {
+      NotificationCenter.default.removeObserver(experimentsObserver)
     }
   }
 
@@ -325,6 +321,7 @@ class ExperimentsController: UITableViewController {
     arrowImageView.centerYAnchor.constraint(equalTo: nameLabel.centerYAnchor).isActive = true
     arrowImageView.tag = section
     arrows.append(arrowImageView)
+    rotate(imageView: arrowImageView, isRotated: hiddenSections.contains(section))
 
     let topBorder = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 0.5))
     topBorder.backgroundColor = black20
@@ -361,45 +358,29 @@ class ExperimentsController: UITableViewController {
       return indexPaths
     }
 
-    let rotatedValue: CGFloat
+    let isRotated: Bool
 
     if hiddenSections.contains(section) {
-      rotatedValue = .pi / 2
+      isRotated = false
       hiddenSections.remove(section)
       tableView.insertRows(at: indexPathsForSection(), with: .fade)
     } else {
-      rotatedValue = -(.pi / 2)
+      isRotated = true
       hiddenSections.insert(section)
       tableView.deleteRows(at: indexPathsForSection(), with: .fade)
     }
     arrows.forEach { arrow in
       if arrow.tag == section {
-        UIView.animate(withDuration: 0.3) {
-          arrow.transform = arrow.transform.rotated(by: rotatedValue)
-        }
+        rotate(imageView: arrow, isRotated: isRotated)
       }
     }
   }
 
-  private func getSelectedIndexPaths() -> [IndexPath] {
-    var indexPaths: [IndexPath] = []
-
-    var section: Int = 0
-    var row: Int = 0
-
-    for (index, experiment) in experiments.enumerated() {
-      if let test = State.debugTests.first(where: { test in test.key == experiment.key }),
-        let experimentRow = experiment.options.firstIndex(where: { option in option.value == test.value }) {
-        section = index
-        row = experimentRow
-      } else if let test = State.tests.first(where: { test in test.key == experiment.key }),
-        let experimentRow = experiment.options.firstIndex(where: { option in option.value == test.value }) {
-        section = index
-        row = experimentRow
-      }
-      indexPaths.append(IndexPath(row: row, section: section))
+  private func rotate(imageView: UIImageView, isRotated: Bool) {
+    UIView.animate(withDuration: 0.3) {
+      imageView.transform = isRotated
+        ? .identity
+        : CGAffineTransform(rotationAngle: .pi / 2)
     }
-
-    return indexPaths
   }
 }

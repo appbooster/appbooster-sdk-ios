@@ -13,10 +13,13 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    let ab = AppboosterAB(
+    let ab = AppboosterSDK(
       sdkToken: "<YOUR_SDK_TOKEN>",
       appId: "<YOUR_APP_ID>",
-      defaults: ["<TEST_1_KEY>": "<TEST_1_DEFAULT_VALUE>"]
+      defaults: [
+        "<TEST_1_KEY>": "<TEST_1_DEFAULT_VALUE>",
+        "<TEST_2_KEY>": "<TEST_2_DEFAULT_VALUE>"
+      ]
     )
 
     ab.fetch() { abError in

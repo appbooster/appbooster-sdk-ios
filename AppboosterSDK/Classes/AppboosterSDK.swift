@@ -11,7 +11,6 @@ import AdSupport
 
 public final class AppboosterSDK: NSObject {
 
-  // TODO: replace serverUrl
   private let serverUrl: String = "https://api.appbooster.com"
   private let sdkToken: String
   private let appId: String

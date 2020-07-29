@@ -19,7 +19,7 @@ extension UIViewController {
     if AppboosterDebugMode.isOn &&
       AppboosterDebugMode.usingShake &&
       motion == .motionShake {
-      AppboosterDebugMode.showDebugMenu(from: self)
+      AppboosterDebugMode.showMenu(from: self)
     }
   }
 
