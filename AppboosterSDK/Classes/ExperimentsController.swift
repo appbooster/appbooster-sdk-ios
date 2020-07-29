@@ -10,8 +10,8 @@ import UIKit
 
 private let controllerTitle: String = "A/B-tests"
 private let tableTitle: String = "In debug mode, you can:\n1. See all available experiments for this app build\n2. View all options as users see them.\n\nAVAILABLE EXPERIMENTS"
-private let reloadTitle: String = "The app will be closed."
-private let resetTitle: String = "Debug experiment values will be cleaned up and the app closed."
+private let reloadTitle: String = "For the changes to take effect, you must restart the app."
+private let resetTitle: String = "The debug values of the experiments will be cleared and the settings received from the server will be returned."
 private let currentOption: String = "Current option"
 private let backgroundColor: UIColor = UIColor(red: 237/255, green: 237/255, blue: 241/255, alpha: 1)
 private let blue: UIColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
@@ -220,35 +220,20 @@ class ExperimentsController: UITableViewController {
 
   @objc
   private func reset() {
-    showActionSheet(
-      title: resetTitle,
-      actionTitle: "Reset"
-    ) { _ in
+    let alertController = UIAlertController(title: resetTitle, message: nil, preferredStyle: .actionSheet)
+    let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+    let action = UIAlertAction(title: "Reset", style: .default) { _ in
       State.debugTests.removeAll()
-      exit(0)
     }
+    alertController.addAction(cancel)
+    alertController.addAction(action)
+    present(alertController, animated: true)
   }
 
   @objc
   private func reload() {
-    showActionSheet(
-      title: reloadTitle,
-      actionTitle: "Reload"
-    ) { _ in
-      exit(0)
-    }
-  }
-
-  private func showActionSheet(
-    title: String? = nil,
-    message: String? = nil,
-    actionTitle: String,
-    handler: ((UIAlertAction) -> Void)? = nil
-  ) {
-    let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
-    let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-    let action = UIAlertAction(title: actionTitle, style: .default, handler: handler)
-    alertController.addAction(cancel)
+    let alertController = UIAlertController(title: reloadTitle, message: nil, preferredStyle: .alert)
+    let action = UIAlertAction(title: "OK", style: .default, handler: nil)
     alertController.addAction(action)
     present(alertController, animated: true)
   }
