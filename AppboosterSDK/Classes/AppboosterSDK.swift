@@ -9,7 +9,7 @@
 import UIKit
 import AdSupport
 
-public final class AppboosterAB: NSObject {
+public final class AppboosterSDK: NSObject {
 
   // TODO: replace serverUrl
   private let serverUrl: String = "https://api.appbooster.com"

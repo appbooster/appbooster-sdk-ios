@@ -12,7 +12,7 @@
 		3E269E2324C85170002C5608 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E269E2124C85170002C5608 /* Main.storyboard */; };
 		3E269E2524C85173002C5608 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E269E2424C85173002C5608 /* Assets.xcassets */; };
 		3E269E2824C85173002C5608 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E269E2624C85173002C5608 /* LaunchScreen.storyboard */; };
-		3E2EAFE324C96880001643BD /* AppboosterAB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EAFDD24C96880001643BD /* AppboosterAB.swift */; };
+		3E2EAFE324C96880001643BD /* AppboosterSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EAFDD24C96880001643BD /* AppboosterSDK.swift */; };
 		3E2EAFE424C96880001643BD /* AnyCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EAFDE24C96880001643BD /* AnyCodable.swift */; };
 		3E2EAFE524C96880001643BD /* AppboosterABError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EAFDF24C96880001643BD /* AppboosterABError.swift */; };
 		3E2EAFE624C96880001643BD /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EAFE024C96880001643BD /* API.swift */; };
@@ -26,6 +26,7 @@
 		3E2EAFF824CFFE33001643BD /* AppboosterExperimentOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EAFF724CFFE33001643BD /* AppboosterExperimentOption.swift */; };
 		3E2EAFFA24CFFE3D001643BD /* AppboosterTestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EAFF924CFFE3D001643BD /* AppboosterTestResponse.swift */; };
 		3E2EAFFC24D01DB5001643BD /* AppboosterDebugMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EAFFB24D01DB5001643BD /* AppboosterDebugMode.swift */; };
+		3E2EB00D24D068D5001643BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E2EB00C24D068D5001643BD /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +37,7 @@
 		3E269E2424C85173002C5608 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3E269E2724C85173002C5608 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3E269E2924C85173002C5608 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3E2EAFDD24C96880001643BD /* AppboosterAB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppboosterAB.swift; path = AppboosterSDK/Classes/AppboosterAB.swift; sourceTree = SOURCE_ROOT; };
+		3E2EAFDD24C96880001643BD /* AppboosterSDK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppboosterSDK.swift; path = AppboosterSDK/Classes/AppboosterSDK.swift; sourceTree = SOURCE_ROOT; };
 		3E2EAFDE24C96880001643BD /* AnyCodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnyCodable.swift; path = AppboosterSDK/Classes/AnyCodable.swift; sourceTree = SOURCE_ROOT; };
 		3E2EAFDF24C96880001643BD /* AppboosterABError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppboosterABError.swift; path = AppboosterSDK/Classes/AppboosterABError.swift; sourceTree = SOURCE_ROOT; };
 		3E2EAFE024C96880001643BD /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = API.swift; path = AppboosterSDK/Classes/API.swift; sourceTree = SOURCE_ROOT; };
@@ -50,6 +51,7 @@
 		3E2EAFF724CFFE33001643BD /* AppboosterExperimentOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppboosterExperimentOption.swift; path = AppboosterSDK/Classes/AppboosterExperimentOption.swift; sourceTree = SOURCE_ROOT; };
 		3E2EAFF924CFFE3D001643BD /* AppboosterTestResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppboosterTestResponse.swift; path = AppboosterSDK/Classes/AppboosterTestResponse.swift; sourceTree = SOURCE_ROOT; };
 		3E2EAFFB24D01DB5001643BD /* AppboosterDebugMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppboosterDebugMode.swift; path = AppboosterSDK/Classes/AppboosterDebugMode.swift; sourceTree = SOURCE_ROOT; };
+		3E2EB00C24D068D5001643BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = AppboosterSDK/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 		3E2EAFDB24C9685B001643BD /* AppboosterSDK */ = {
 			isa = PBXGroup;
 			children = (
+				3E2EB00C24D068D5001643BD /* Assets.xcassets */,
 				3E2EAFDC24C9686D001643BD /* Classes */,
 			);
 			path = AppboosterSDK;
@@ -106,7 +109,7 @@
 			children = (
 				3E2EAFDE24C96880001643BD /* AnyCodable.swift */,
 				3E2EAFE024C96880001643BD /* API.swift */,
-				3E2EAFDD24C96880001643BD /* AppboosterAB.swift */,
+				3E2EAFDD24C96880001643BD /* AppboosterSDK.swift */,
 				3E2EAFDF24C96880001643BD /* AppboosterABError.swift */,
 				3E2EAFFB24D01DB5001643BD /* AppboosterDebugMode.swift */,
 				3E2EAFEB24C98CF0001643BD /* AppboosterExperiment.swift */,
@@ -182,6 +185,7 @@
 			files = (
 				3E269E2824C85173002C5608 /* LaunchScreen.storyboard in Resources */,
 				3E269E2524C85173002C5608 /* Assets.xcassets in Resources */,
+				3E2EB00D24D068D5001643BD /* Assets.xcassets in Resources */,
 				3E269E2324C85170002C5608 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -195,7 +199,7 @@
 			files = (
 				3E2EAFEE24C996BA001643BD /* ExperimentsController.swift in Sources */,
 				3E2EAFF024C9A4FA001643BD /* UIViewController+Shake.swift in Sources */,
-				3E2EAFE324C96880001643BD /* AppboosterAB.swift in Sources */,
+				3E2EAFE324C96880001643BD /* AppboosterSDK.swift in Sources */,
 				3E2EAFFA24CFFE3D001643BD /* AppboosterTestResponse.swift in Sources */,
 				3E2EAFE424C96880001643BD /* AnyCodable.swift in Sources */,
 				3E2EAFF824CFFE33001643BD /* AppboosterExperimentOption.swift in Sources */,
