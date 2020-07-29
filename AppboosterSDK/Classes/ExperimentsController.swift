@@ -16,10 +16,16 @@ class ExperimentCell: UITableViewCell {
   private var descriptionLabel: UILabel!
   private var keyLabel: UILabel!
 
-  func configure(_ option: AppboosterExperimentOption) {
+  func configure(
+    with option: AppboosterExperimentOption,
+    isCurrent: Bool,
+    isSelected: Bool
+  ) {
     descriptionLabel.text = option.description
     keyLabel.text = "\(option.value)"
-//    currentLabel.isHidden = true
+    currentLabel.isHidden = !isCurrent
+    let imageName = isSelected ? "checkbox-fill" : "checkbox"
+    checkImageView.image = UIImage(named: imageName)
   }
 
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -85,8 +91,9 @@ class ExperimentsController: UITableViewController {
   }
   private var selectedIndexPaths: [IndexPath] = []
   private var arrows: [UIImageView] = []
+  private var experimentsObserver: NSObjectProtocol?
 
-  var hiddenSections: Set<Int> = []
+  private var hiddenSections: Set<Int> = []
 
   // MARK: UITableViewController
 
@@ -100,6 +107,23 @@ class ExperimentsController: UITableViewController {
 
     for index in 0 ..< experiments.count {
       hiddenSections.insert(index)
+    }
+
+    experimentsObserver = NotificationCenter.default.addObserver(
+      forName: Notification.Name("AllExperimentsReceived"),
+      object: nil,
+      queue: .main) { [weak self] notification in
+        guard let self = self else { return }
+
+        self.tableView.reloadData()
+    }
+  }
+
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+
+    if let userProgressObserver = experimentsObserver {
+      NotificationCenter.default.removeObserver(userProgressObserver)
     }
   }
 
@@ -121,10 +145,22 @@ class ExperimentsController: UITableViewController {
   override func tableView(_ tableView: UITableView,
                           cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "\(ExperimentCell.self)", for: indexPath)
-
     let option = experiments[indexPath.section].options[indexPath.row]
+
     if let experimentCell = cell as? ExperimentCell {
-      experimentCell.configure(option)
+      let isCurrent = State.tests.first(where: {
+        $0.key == experiments[indexPath.section].key &&
+          $0.value == option.value
+      }) != nil
+      let isSelected = State.debugTests.first(where: {
+        $0.key == experiments[indexPath.section].key &&
+          $0.value == option.value
+      }) != nil
+      experimentCell.configure(
+        with: option,
+        isCurrent: isCurrent,
+        isSelected: isSelected
+      )
     }
 
     return cell
@@ -285,9 +321,11 @@ class ExperimentsController: UITableViewController {
       hiddenSections.insert(section)
       tableView.deleteRows(at: indexPathsForSection(), with: .fade)
     }
-    if let arrowImageView = arrows.first(where: { $0.tag == section }) {
-      UIView.animate(withDuration: 0.3) {
-        arrowImageView.transform = arrowImageView.transform.rotated(by: rotatedValue)
+    arrows.forEach { arrow in
+      if arrow.tag == section {
+        UIView.animate(withDuration: 0.3) {
+          arrow.transform = arrow.transform.rotated(by: rotatedValue)
+        }
       }
     }
   }

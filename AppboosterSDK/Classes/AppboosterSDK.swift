@@ -161,6 +161,7 @@ public final class AppboosterSDK: NSObject {
                   let experimentsResponse = try JSONDecoder().decode(AppboosterExperimentsResponse.self, from: data)
 
                   State.experiments = experimentsResponse.experiments
+                  NotificationCenter.default.post(name: Notification.Name("AllExperimentsReceived"), object: nil)
 
                   completion(nil)
                 }
