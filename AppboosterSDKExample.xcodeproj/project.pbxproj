@@ -28,6 +28,7 @@
 		3E2EAFFC24D01DB5001643BD /* AppboosterDebugMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EAFFB24D01DB5001643BD /* AppboosterDebugMode.swift */; };
 		3E2EB00D24D068D5001643BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E2EB00C24D068D5001643BD /* Assets.xcassets */; };
 		3E2EB00F24D16F06001643BD /* AppboosterExperimentsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EB00E24D16F05001643BD /* AppboosterExperimentsResponse.swift */; };
+		3E2EB01324D1B66D001643BD /* ExperimentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EB01224D1B66D001643BD /* ExperimentsCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		3E2EAFFB24D01DB5001643BD /* AppboosterDebugMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppboosterDebugMode.swift; path = AppboosterSDK/Classes/AppboosterDebugMode.swift; sourceTree = SOURCE_ROOT; };
 		3E2EB00C24D068D5001643BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = AppboosterSDK/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		3E2EB00E24D16F05001643BD /* AppboosterExperimentsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppboosterExperimentsResponse.swift; path = AppboosterSDK/Classes/AppboosterExperimentsResponse.swift; sourceTree = SOURCE_ROOT; };
+		3E2EB01224D1B66D001643BD /* ExperimentsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExperimentsCell.swift; path = AppboosterSDK/Classes/ExperimentsCell.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				3E2EAFDD24C96880001643BD /* AppboosterSDK.swift */,
 				3E2EAFE124C96880001643BD /* AppboosterTest.swift */,
 				3E2EAFF924CFFE3D001643BD /* AppboosterTestResponse.swift */,
+				3E2EB01224D1B66D001643BD /* ExperimentsCell.swift */,
 				3E2EAFED24C996BA001643BD /* ExperimentsController.swift */,
 				3E2EAFF324CEBD9C001643BD /* JWTToken.swift */,
 				3E2EAFE224C96880001643BD /* State.swift */,
@@ -200,6 +203,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E2EB01324D1B66D001643BD /* ExperimentsCell.swift in Sources */,
 				3E2EAFEE24C996BA001643BD /* ExperimentsController.swift in Sources */,
 				3E2EAFF024C9A4FA001643BD /* UIViewController+Shake.swift in Sources */,
 				3E2EAFE324C96880001643BD /* AppboosterSDK.swift in Sources */,

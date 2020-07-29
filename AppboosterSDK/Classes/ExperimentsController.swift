@@ -8,80 +8,17 @@
 
 import UIKit
 
-private let controllerTitle: String = "A/B-tests"
-private let tableTitle: String = "In debug mode, you can:\n1. See all available experiments for this app build\n2. View all options as users see them.\n\nAVAILABLE EXPERIMENTS"
-private let reloadTitle: String = "For the changes to take effect, you must restart the app."
-private let resetTitle: String = "The debug values of the experiments will be cleared and the settings received from the server will be returned."
-private let currentOption: String = "Current option"
-private let backgroundColor: UIColor = UIColor(red: 237/255, green: 237/255, blue: 241/255, alpha: 1)
-private let blue: UIColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
-private let black20: UIColor = UIColor.black.withAlphaComponent(0.2)
-private let black40: UIColor = UIColor.black.withAlphaComponent(0.4)
-
-class ExperimentCell: UITableViewCell {
-
-  private var checkImageView: UIImageView!
-  private var stackView: UIStackView!
-  private var currentLabel: UILabel!
-  private var descriptionLabel: UILabel!
-  private var keyLabel: UILabel!
-
-  func configure(
-    with option: AppboosterExperimentOption,
-    isCurrent: Bool,
-    isSelected: Bool
-  ) {
-    descriptionLabel.text = option.description
-    keyLabel.text = "\(option.value)"
-    currentLabel.isHidden = !isCurrent
-    let imageName = isSelected ? "checkbox-fill" : "checkbox"
-    checkImageView.image = UIImage(named: imageName)
-  }
-
-  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-    super.init(style: style, reuseIdentifier: reuseIdentifier)
-
-    checkImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
-    contentView.addSubview(checkImageView)
-    checkImageView.translatesAutoresizingMaskIntoConstraints = false
-    checkImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
-    checkImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-    checkImageView.setContentHuggingPriority(UILayoutPriority(rawValue: 255), for: .horizontal)
-
-    stackView = UIStackView()
-    stackView.spacing = 2
-    stackView.axis = .vertical
-    contentView.addSubview(stackView)
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    stackView.leadingAnchor.constraint(equalTo: checkImageView.trailingAnchor, constant: 20).isActive = true
-    stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
-    stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12).isActive = true
-    stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12).isActive = true
-
-    currentLabel = UILabel()
-    currentLabel.text = currentOption
-    currentLabel.textColor = blue
-    currentLabel.font = .systemFont(ofSize: 13)
-    stackView.addArrangedSubview(currentLabel)
-
-    descriptionLabel = UILabel()
-    descriptionLabel.textColor = .black
-    descriptionLabel.font = .systemFont(ofSize: 17)
-    descriptionLabel.numberOfLines = 0
-    stackView.addArrangedSubview(descriptionLabel)
-
-    keyLabel = UILabel()
-    keyLabel.textColor = black40
-    keyLabel.font = .systemFont(ofSize: 13)
-    stackView.addArrangedSubview(keyLabel)
-  }
-
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-}
-
 class ExperimentsController: UITableViewController {
+
+  // MARK: - Constants
+
+  private let controllerTitle: String = "A/B-tests"
+  private let tableTitle: String = "In debug mode, you can:\n1. See all available experiments for this app build\n2. View all options as users see them.\n\nAVAILABLE EXPERIMENTS"
+  private let resetTitle: String = "The debug values of the experiments will be cleared and the settings received from the server will be returned."
+
+  private let backgroundColor: UIColor = UIColor(red: 237/255, green: 237/255, blue: 241/255, alpha: 1)
+  private let black20: UIColor = UIColor.black.withAlphaComponent(0.2)
+  private let black40: UIColor = UIColor.black.withAlphaComponent(0.4)
 
   // MARK: - Private Properties
 
@@ -106,6 +43,10 @@ class ExperimentsController: UITableViewController {
     for index in 0 ..< experiments.count {
       hiddenSections.insert(index)
     }
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
 
     experimentsObserver = NotificationCenter.default.addObserver(
       forName: Notification.Name("AllExperimentsReceived"),
@@ -198,19 +139,12 @@ class ExperimentsController: UITableViewController {
       target: self,
       action: #selector(close)
     )
-    let resetButton = UIBarButtonItem(
+    navigationItem.rightBarButtonItem = UIBarButtonItem(
       title: "Reset",
       style: .plain,
       target: self,
       action: #selector(reset)
     )
-    let reloadButton = UIBarButtonItem(
-      title: "Reload",
-      style: .done,
-      target: self,
-      action: #selector(reload)
-    )
-    navigationItem.rightBarButtonItems = [reloadButton, resetButton]
   }
 
   @objc
@@ -224,16 +158,9 @@ class ExperimentsController: UITableViewController {
     let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
     let action = UIAlertAction(title: "Reset", style: .default) { _ in
       State.debugTests.removeAll()
+      self.tableView.reloadData()
     }
     alertController.addAction(cancel)
-    alertController.addAction(action)
-    present(alertController, animated: true)
-  }
-
-  @objc
-  private func reload() {
-    let alertController = UIAlertController(title: reloadTitle, message: nil, preferredStyle: .alert)
-    let action = UIAlertAction(title: "OK", style: .default, handler: nil)
     alertController.addAction(action)
     present(alertController, animated: true)
   }

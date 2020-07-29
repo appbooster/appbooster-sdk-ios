@@ -31,11 +31,9 @@ public final class AppboosterSDK: NSObject {
       AppboosterTest(key: key, value: value as? AnyCodable ?? "")
     }
 
-    if let deviceId = deviceId {
-      self.deviceId = deviceId
-    } else {
-      self.deviceId = AppboosterKeychain.getDeviceId() ?? AppboosterKeychain.setNewDeviceId()
-    }
+    self.deviceId = deviceId
+      ?? AppboosterKeychain.getDeviceId()
+      ?? AppboosterKeychain.setNewDeviceId()
 
     super.init()
   }
@@ -179,14 +177,13 @@ public final class AppboosterSDK: NSObject {
   // MARK: Getters
 
   public func value<T>(_ key: String) -> T? {
-    if AppboosterDebugMode.isOn {
-      return debugTests.filter({ $0.key == key }).first?.value.value as? T
-        ?? tests.filter({ $0.key == key }).first?.value.value as? T
-        ?? defaultTests.filter({ $0.key == key }).first?.value.value as? T
-    } else {
-      return tests.filter({ $0.key == key }).first?.value.value as? T
-        ?? defaultTests.filter({ $0.key == key }).first?.value.value as? T
-    }
+    let value = AppboosterDebugMode.isOn
+      ? debugTests.first(where: { $0.key == key })?.value.value as? T
+      : nil
+
+    return value
+      ?? tests.first(where: { $0.key == key })?.value.value as? T
+      ?? defaultTests.first(where: { $0.key == key })?.value.value as? T
   }
 
   public var userProperties: [String: Any] {

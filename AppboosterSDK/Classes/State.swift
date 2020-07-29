@@ -41,7 +41,7 @@ struct State {
     }
   }
 
-  // Service
+  // MARK: Service
 
   private static func getTestsData(for key: String) -> [AppboosterTest] {
     if let data = UserDefaults.standard.object(forKey: key) as? Data,
