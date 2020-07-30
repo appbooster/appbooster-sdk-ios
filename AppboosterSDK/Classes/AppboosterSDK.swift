@@ -88,9 +88,9 @@ public final class AppboosterSDK: NSObject {
                   let testsResponse = try JSONDecoder().decode(AppboosterTestResponse.self, from: data)
 
                   self.tests = testsResponse.experiments
-                  AppboosterDebugMode.isOn = testsResponse.debug
+                  AppboosterDebugMode.isOn = testsResponse.meta.debug
 
-                  if testsResponse.debug {
+                  if testsResponse.meta.debug {
                     self.fetchAllExperiments(timeoutInterval: timeoutInterval, completion: completion)
                   } else {
                     completion(nil)
@@ -157,7 +157,23 @@ public final class AppboosterSDK: NSObject {
                 do {
                   let experimentsResponse = try JSONDecoder().decode(AppboosterExperimentsResponse.self, from: data)
 
-                  State.experiments = experimentsResponse.experiments
+                  experimentsResponse.experiments.forEach { experiment in
+                    if experiment.status == .finished {
+                      if let test = State.defaultTests.first(where: { $0.key == experiment.key }),
+                        let defaultOption = experiment.options.first(where: { $0.value == test.value }) {
+                        let finishedExperiment = AppboosterExperiment(
+                          name: experiment.name,
+                          key: experiment.key,
+                          status: .finished,
+                          options: [defaultOption]
+                        )
+                        State.experiments.append(finishedExperiment)
+                      }
+                    } else {
+                      State.experiments.append(experiment)
+                    }
+                  }
+
                   NotificationCenter.default.post(name: Notification.Name("AllExperimentsReceived"), object: nil)
 
                   completion(nil)
@@ -184,6 +200,10 @@ public final class AppboosterSDK: NSObject {
     return value
       ?? tests.first(where: { $0.key == key })?.value.value as? T
       ?? defaultTests.first(where: { $0.key == key })?.value.value as? T
+  }
+
+  public subscript<T>(key: String) -> T? {
+    return value(key)
   }
 
   public var userProperties: [String: Any] {

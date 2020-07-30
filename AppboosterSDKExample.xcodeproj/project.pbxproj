@@ -29,6 +29,8 @@
 		3E2EB00D24D068D5001643BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E2EB00C24D068D5001643BD /* Assets.xcassets */; };
 		3E2EB00F24D16F06001643BD /* AppboosterExperimentsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EB00E24D16F05001643BD /* AppboosterExperimentsResponse.swift */; };
 		3E2EB01324D1B66D001643BD /* ExperimentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EB01224D1B66D001643BD /* ExperimentsCell.swift */; };
+		3EE5D17524D2925E007CC59A /* AppboosterTestMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE5D17424D2925E007CC59A /* AppboosterTestMeta.swift */; };
+		3EE5D17724D29315007CC59A /* AppboosterExperimentStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE5D17624D29315007CC59A /* AppboosterExperimentStatus.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +58,8 @@
 		3E2EB00C24D068D5001643BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = AppboosterSDK/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		3E2EB00E24D16F05001643BD /* AppboosterExperimentsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppboosterExperimentsResponse.swift; path = AppboosterSDK/Classes/AppboosterExperimentsResponse.swift; sourceTree = SOURCE_ROOT; };
 		3E2EB01224D1B66D001643BD /* ExperimentsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExperimentsCell.swift; path = AppboosterSDK/Classes/ExperimentsCell.swift; sourceTree = SOURCE_ROOT; };
+		3EE5D17424D2925E007CC59A /* AppboosterTestMeta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppboosterTestMeta.swift; path = AppboosterSDK/Classes/AppboosterTestMeta.swift; sourceTree = SOURCE_ROOT; };
+		3EE5D17624D29315007CC59A /* AppboosterExperimentStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppboosterExperimentStatus.swift; path = AppboosterSDK/Classes/AppboosterExperimentStatus.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,9 +122,11 @@
 				3E2EAFEB24C98CF0001643BD /* AppboosterExperiment.swift */,
 				3E2EAFF724CFFE33001643BD /* AppboosterExperimentOption.swift */,
 				3E2EB00E24D16F05001643BD /* AppboosterExperimentsResponse.swift */,
+				3EE5D17624D29315007CC59A /* AppboosterExperimentStatus.swift */,
 				3E2EAFF524CEDFAB001643BD /* AppboosterKeychain.swift */,
 				3E2EAFDD24C96880001643BD /* AppboosterSDK.swift */,
 				3E2EAFE124C96880001643BD /* AppboosterTest.swift */,
+				3EE5D17424D2925E007CC59A /* AppboosterTestMeta.swift */,
 				3E2EAFF924CFFE3D001643BD /* AppboosterTestResponse.swift */,
 				3E2EB01224D1B66D001643BD /* ExperimentsCell.swift */,
 				3E2EAFED24C996BA001643BD /* ExperimentsController.swift */,
@@ -217,8 +223,10 @@
 				3E269E2024C85170002C5608 /* ViewController.swift in Sources */,
 				3E2EAFE524C96880001643BD /* AppboosterABError.swift in Sources */,
 				3E2EAFF624CEDFAB001643BD /* AppboosterKeychain.swift in Sources */,
+				3EE5D17724D29315007CC59A /* AppboosterExperimentStatus.swift in Sources */,
 				3E2EAFE624C96880001643BD /* API.swift in Sources */,
 				3E269E1C24C85170002C5608 /* AppDelegate.swift in Sources */,
+				3EE5D17524D2925E007CC59A /* AppboosterTestMeta.swift in Sources */,
 				3E2EAFE824C96880001643BD /* State.swift in Sources */,
 				3E2EAFF424CEBD9D001643BD /* JWTToken.swift in Sources */,
 			);
