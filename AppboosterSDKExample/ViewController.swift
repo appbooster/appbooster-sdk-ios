@@ -26,8 +26,10 @@ class ViewController: UIViewController {
       guard abError == nil else { return }
 
       let test1Value: String? = ab.value("<TEST_1_KEY>")
+      let test2Value: String? = ab["<TEST_2_KEY>"]
 
       print(test1Value ?? "")
+      print(test2Value ?? "")
     }
   }
 
