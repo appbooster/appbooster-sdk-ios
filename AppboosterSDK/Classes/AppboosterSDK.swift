@@ -21,6 +21,7 @@ public final class AppboosterSDK: NSObject {
     sdkToken: String,
     appId: String,
     deviceId: String? = nil,
+    usingShake: Bool = true,
     defaults: [String: Any]
   ) {
     self.sdkToken = sdkToken
@@ -34,6 +35,8 @@ public final class AppboosterSDK: NSObject {
     self.deviceId = deviceId
       ?? AppboosterKeychain.getDeviceId()
       ?? AppboosterKeychain.setNewDeviceId()
+
+    AppboosterDebugMode.usingShake = usingShake
 
     super.init()
   }
@@ -206,14 +209,14 @@ public final class AppboosterSDK: NSObject {
     return value(key)
   }
 
-  public var userProperties: [String: Any] {
-    var userProperties: [String: Any] = [:]
+  public var userTests: [String: Any] {
+    var userTests: [String: Any] = [:]
 
     for test in tests {
-      userProperties[test.key] = test.value.value
+      userTests[test.key] = test.value.value
     }
 
-    return userProperties
+    return userTests
   }
 
   // MARK: Service

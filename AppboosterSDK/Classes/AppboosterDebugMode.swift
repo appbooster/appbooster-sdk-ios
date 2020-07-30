@@ -11,8 +11,9 @@ import UIKit
 
 public struct AppboosterDebugMode {
 
+  static var usingShake: Bool = true
+
   public static var isOn: Bool = false
-  public static var usingShake: Bool = true
 
   public static func showMenu(from controller: UIViewController) {
     let navigationController = UINavigationController(rootViewController: ExperimentsController())
