@@ -168,7 +168,9 @@ class ExperimentsController: UITableViewController {
   private func configureNavigationBar() {
     addNavigationBarButtons()
     title = controllerTitle
-    navigationController?.navigationBar.prefersLargeTitles = true
+    if #available(iOS 11.0, *) {
+      navigationController?.navigationBar.prefersLargeTitles = true
+    }
     navigationController?.navigationBar.backgroundColor = .white
     navigationController?.navigationBar.isTranslucent = false
   }
