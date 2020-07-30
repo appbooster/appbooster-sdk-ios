@@ -4,19 +4,19 @@ Mobile framework for Appbooster platform.
 
 ## Installation
 
-CocoaPods:
+#### CocoaPods:
 
 ```
 pod 'AppboosterSDK'
 ```
 
-Swift Package Manager:
+#### Swift Package Manager:
 
 1. Select File > Swift Packages > Add Package Dependency. Enter https://github.com/appbooster/appbooster-sdk-ios.git in the "Enter Package Repository URL" dialog.
 2. In the next page, specify the version resolving rule as "Up to Next Major" with "0.1.0" as its earliest version.
 3. After Xcode checking out the source and resolving the version, you can choose the "AppboosterSDK" library and add it to your app target.
 
-Manual:
+#### Manual:
 
 Download ZIP and copy folder **AppboosterSDK** to your app.
 
