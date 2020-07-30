@@ -37,8 +37,7 @@ let ab = AppboosterSDK(sdkToken: "<YOUR_SDK_TOKEN>",
                        defaults: [
                          "<TEST_1_KEY>": "<TEST_1_DEFAULT_VALUE>",
                          "<TEST_2_KEY>": "<TEST_2_DEFAULT_VALUE>"
-                       ]
-)
+                       ])
 ```
 
 ### How to fetch known tests values that associated with your device?
@@ -60,7 +59,7 @@ or
 let value: String? = ab.value("<TEST_KEY>")
 ```
 
-In case of problems with no internet connection or another, the default values specified during initialization are used
+In case of problems with no internet connection or another, the default values specified during initialization are used.
 
 ### How to get user properties for analytics?
 
@@ -91,7 +90,7 @@ If you are already using shake motion in your app for other purposes, you can tu
 AppboosterDebugMode.usingShake = false // true by default
 ```
 
-And display the debug menu on your condition
+And display the debug menu on your condition.
 
 ```
 AppboosterDebugMode.showMenu(from: <yourViewController>) // by default is displayed from any view controller 
