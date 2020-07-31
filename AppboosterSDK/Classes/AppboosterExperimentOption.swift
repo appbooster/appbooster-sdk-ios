@@ -10,5 +10,5 @@ import Foundation
 
 struct AppboosterExperimentOption: Codable {
   let value: AnyCodable
-  let description: String
+  let description: String?
 }

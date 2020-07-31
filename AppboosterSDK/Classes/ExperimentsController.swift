@@ -87,11 +87,11 @@ class ExperimentsController: UITableViewController {
     let option = experiments[indexPath.section].options[indexPath.row]
 
     if let experimentCell = cell as? ExperimentCell {
-      let isCurrent = State.tests.first(where: {
+      let isCurrent = State.experimentsValues.first(where: {
         $0.key == experiments[indexPath.section].key &&
           $0.value == option.value
       }) != nil
-      let isSelected = State.debugTests.first(where: {
+      let isSelected = State.debugExperimentsValues.first(where: {
         $0.key == experiments[indexPath.section].key &&
           $0.value == option.value
       }) != nil
@@ -120,11 +120,11 @@ class ExperimentsController: UITableViewController {
   override func tableView(_ tableView: UITableView,
                           didSelectRowAt indexPath: IndexPath) {
     let experiment = experiments[indexPath.section]
-    if let index = State.debugTests.firstIndex(where: { test in test.key == experiment.key }) {
-      State.debugTests.remove(at: index)
+    if let index = State.debugExperimentsValues.firstIndex(where: { experimentValue in experimentValue.key == experiment.key }) {
+      State.debugExperimentsValues.remove(at: index)
     }
-    let test = AppboosterTest(key: experiment.key, value: experiment.options[indexPath.row].value)
-    State.debugTests.append(test)
+    let experimentValue = AppboosterExperimentValue(key: experiment.key, value: experiment.options[indexPath.row].value)
+    State.debugExperimentsValues.append(experimentValue)
 
     tableView.deselectRow(at: indexPath, animated: true)
     tableView.reloadSections([indexPath.section], with: .automatic)
@@ -157,7 +157,7 @@ class ExperimentsController: UITableViewController {
     let alertController = UIAlertController(title: resetTitle, message: nil, preferredStyle: .actionSheet)
     let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
     let action = UIAlertAction(title: "Reset", style: .default) { _ in
-      State.debugTests.removeAll()
+      State.debugExperimentsValues.removeAll()
       self.tableView.reloadData()
     }
     alertController.addAction(cancel)

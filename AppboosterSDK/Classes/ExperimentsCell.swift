@@ -26,7 +26,7 @@ class ExperimentCell: UITableViewCell {
     isCurrent: Bool,
     isSelected: Bool
   ) {
-    descriptionLabel.text = option.description
+    descriptionLabel.text = option.description ?? "No description"
     keyLabel.text = "\(option.value)"
     currentLabel.isHidden = !isCurrent
     let imageName = isSelected ? "checkbox-fill" : "checkbox"

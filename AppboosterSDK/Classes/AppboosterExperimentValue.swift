@@ -1,5 +1,5 @@
 //
-//  AppboosterTestResponse.swift
+//  AppboosterExperimentValue.swift
 //  AppboosterSDK
 //
 //  Created by Appbooster on 22/07/2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct AppboosterTestResponse: Codable {
-  let experiments: [AppboosterTest]
-  let meta: AppboosterTestMeta
+struct AppboosterExperimentValue: Codable {
+  let key: String
+  let value: AnyCodable
 }

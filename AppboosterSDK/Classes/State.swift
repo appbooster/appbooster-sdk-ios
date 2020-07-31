@@ -10,19 +10,19 @@ import Foundation
 
 struct State {
 
-  static var tests: [AppboosterTest] {
-    get { getTestsData(for: #function) }
-    set(newValue) { setTestsData(newValue, for: #function) }
+  static var experimentsValues: [AppboosterExperimentValue] {
+    get { getExperimentsValues(for: #function) }
+    set(newValue) { setExperimentsValues(newValue, for: #function) }
   }
 
-  static var debugTests: [AppboosterTest] {
-    get { getTestsData(for: #function) }
-    set(newValue) { setTestsData(newValue, for: #function) }
+  static var debugExperimentsValues: [AppboosterExperimentValue] {
+    get { getExperimentsValues(for: #function) }
+    set(newValue) { setExperimentsValues(newValue, for: #function) }
   }
 
-  static var defaultTests: [AppboosterTest] {
-    get { getTestsData(for: #function) }
-    set(newValue) { setTestsData(newValue, for: #function) }
+  static var defaultExperimentsValues: [AppboosterExperimentValue] {
+    get { getExperimentsValues(for: #function) }
+    set(newValue) { setExperimentsValues(newValue, for: #function) }
   }
 
   static var experiments: [AppboosterExperiment] {
@@ -43,16 +43,16 @@ struct State {
 
   // MARK: Service
 
-  private static func getTestsData(for key: String) -> [AppboosterTest] {
+  private static func getExperimentsValues(for key: String) -> [AppboosterExperimentValue] {
     if let data = UserDefaults.standard.object(forKey: key) as? Data,
-      let value = try? JSONDecoder().decode([AppboosterTest].self, from: data) {
+      let value = try? JSONDecoder().decode([AppboosterExperimentValue].self, from: data) {
       return value
     }
 
     return []
   }
 
-  private static func setTestsData(_ data: [AppboosterTest], for key: String) {
+  private static func setExperimentsValues(_ data: [AppboosterExperimentValue], for key: String) {
     if let data = try? JSONEncoder().encode(data) {
       UserDefaults.standard.set(data, forKey: key)
     }
