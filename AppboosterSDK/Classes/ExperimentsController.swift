@@ -231,6 +231,9 @@ class ExperimentsController: UITableViewController {
     let arrowImageView = UIImageView(image: UIImage(named: "arrow"))
     headerView.addSubview(arrowImageView)
     arrowImageView.translatesAutoresizingMaskIntoConstraints = false
+    arrowImageView.heightAnchor.constraint(equalToConstant: 15).isActive = true
+    arrowImageView.widthAnchor.constraint(equalToConstant: 8).isActive = true
+
     arrowImageView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -16).isActive = true
     arrowImageView.centerYAnchor.constraint(equalTo: nameLabel.centerYAnchor).isActive = true
     arrowImageView.tag = section

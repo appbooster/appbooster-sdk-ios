@@ -39,6 +39,8 @@ class ExperimentCell: UITableViewCell {
     checkImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
     contentView.addSubview(checkImageView)
     checkImageView.translatesAutoresizingMaskIntoConstraints = false
+    checkImageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    checkImageView.widthAnchor.constraint(equalToConstant: 28).isActive = true
     checkImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
     checkImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     checkImageView.setContentHuggingPriority(UILayoutPriority(rawValue: 255), for: .horizontal)
