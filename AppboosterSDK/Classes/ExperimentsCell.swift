@@ -29,8 +29,17 @@ class ExperimentCell: UITableViewCell {
     descriptionLabel.text = option.description ?? "No description"
     keyLabel.text = "\(option.value)"
     currentLabel.isHidden = !isCurrent
-    let imageName = isSelected ? "checkbox-fill" : "checkbox"
-    checkImageView.image = UIImage(named: imageName)
+
+    var image: UIImage?
+
+    let bundle = Bundle(for: AppboosterSDK.self)
+    if let bundleURL = bundle.resourceURL?.appendingPathComponent("AppboosterSDK.bundle") {
+      let resourceBundle = Bundle(url: bundleURL)
+      let imageName = isSelected ? "checkbox-fill" : "checkbox"
+      image = UIImage(named: imageName, in: resourceBundle, compatibleWith: nil)
+    }
+
+    checkImageView.image = image
   }
 
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

@@ -160,6 +160,7 @@ public final class AppboosterSDK: NSObject {
                 do {
                   let experimentsResponse = try JSONDecoder().decode(AppboosterExperimentsResponse.self, from: data)
 
+                  State.experiments.removeAll()
                   experimentsResponse.experiments.forEach { experiment in
                     if experiment.status == .finished {
                       if let experimentValue = State.defaultExperimentsValues.first(where: { $0.key == experiment.key }),

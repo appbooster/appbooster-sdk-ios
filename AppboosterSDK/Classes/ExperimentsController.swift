@@ -228,7 +228,15 @@ class ExperimentsController: UITableViewController {
     keyLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16).isActive = true
     keyLabel.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -14).isActive = true
 
-    let arrowImageView = UIImageView(image: UIImage(named: "arrow"))
+    var arrowImage: UIImage?
+
+    let bundle = Bundle(for: AppboosterSDK.self)
+    if let bundleURL = bundle.resourceURL?.appendingPathComponent("AppboosterSDK.bundle") {
+      let resourceBundle = Bundle(url: bundleURL)
+      arrowImage = UIImage(named: "arrow", in: resourceBundle, compatibleWith: nil)
+    }
+
+    let arrowImageView = UIImageView(image: arrowImage)
     headerView.addSubview(arrowImageView)
     arrowImageView.translatesAutoresizingMaskIntoConstraints = false
     arrowImageView.heightAnchor.constraint(equalToConstant: 15).isActive = true

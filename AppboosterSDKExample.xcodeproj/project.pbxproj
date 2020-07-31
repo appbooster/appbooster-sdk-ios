@@ -28,7 +28,7 @@
 		3E2EAFFC24D01DB5001643BD /* AppboosterDebugMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EAFFB24D01DB5001643BD /* AppboosterDebugMode.swift */; };
 		3E2EB00F24D16F06001643BD /* AppboosterExperimentsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EB00E24D16F05001643BD /* AppboosterExperimentsResponse.swift */; };
 		3E2EB01324D1B66D001643BD /* ExperimentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EB01224D1B66D001643BD /* ExperimentsCell.swift */; };
-		3E80608524D43BEF009751D1 /* сheckbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E80608224D43BEF009751D1 /* сheckbox.png */; };
+		3E80608524D43BEF009751D1 /* checkbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E80608224D43BEF009751D1 /* checkbox.png */; };
 		3E80608624D43BEF009751D1 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E80608324D43BEF009751D1 /* arrow.png */; };
 		3E80608724D43BEF009751D1 /* checkbox-fill.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E80608424D43BEF009751D1 /* checkbox-fill.png */; };
 		3EE5D17524D2925E007CC59A /* AppboosterExperimentValueMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE5D17424D2925E007CC59A /* AppboosterExperimentValueMeta.swift */; };
@@ -59,7 +59,7 @@
 		3E2EAFFB24D01DB5001643BD /* AppboosterDebugMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppboosterDebugMode.swift; path = AppboosterSDK/Classes/AppboosterDebugMode.swift; sourceTree = SOURCE_ROOT; };
 		3E2EB00E24D16F05001643BD /* AppboosterExperimentsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppboosterExperimentsResponse.swift; path = AppboosterSDK/Classes/AppboosterExperimentsResponse.swift; sourceTree = SOURCE_ROOT; };
 		3E2EB01224D1B66D001643BD /* ExperimentsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExperimentsCell.swift; path = AppboosterSDK/Classes/ExperimentsCell.swift; sourceTree = SOURCE_ROOT; };
-		3E80608224D43BEF009751D1 /* сheckbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "сheckbox.png"; path = "AppboosterSDK/Assets/сheckbox.png"; sourceTree = SOURCE_ROOT; };
+		3E80608224D43BEF009751D1 /* checkbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checkbox.png; path = AppboosterSDK/Assets/checkbox.png; sourceTree = SOURCE_ROOT; };
 		3E80608324D43BEF009751D1 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrow.png; path = AppboosterSDK/Assets/arrow.png; sourceTree = SOURCE_ROOT; };
 		3E80608424D43BEF009751D1 /* checkbox-fill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkbox-fill.png"; path = "AppboosterSDK/Assets/checkbox-fill.png"; sourceTree = SOURCE_ROOT; };
 		3EE5D17424D2925E007CC59A /* AppboosterExperimentValueMeta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppboosterExperimentValueMeta.swift; path = AppboosterSDK/Classes/AppboosterExperimentValueMeta.swift; sourceTree = SOURCE_ROOT; };
@@ -146,7 +146,7 @@
 			children = (
 				3E80608324D43BEF009751D1 /* arrow.png */,
 				3E80608424D43BEF009751D1 /* checkbox-fill.png */,
-				3E80608224D43BEF009751D1 /* сheckbox.png */,
+				3E80608224D43BEF009751D1 /* checkbox.png */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -209,7 +209,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E80608524D43BEF009751D1 /* сheckbox.png in Resources */,
+				3E80608524D43BEF009751D1 /* checkbox.png in Resources */,
 				3E80608724D43BEF009751D1 /* checkbox-fill.png in Resources */,
 				3E269E2824C85173002C5608 /* LaunchScreen.storyboard in Resources */,
 				3E269E2524C85173002C5608 /* Assets.xcassets in Resources */,
