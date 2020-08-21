@@ -62,7 +62,7 @@ In case of problems with no internet connection or another, the values obtained 
 ### How to get user tests for analytics?
 
 ```
-let userTests = ab.userTests
+let experiments = ab.experiments
 ```
 
 You can disable the sending of events to analytics if debug mode is turn on.
