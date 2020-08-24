@@ -81,12 +81,14 @@ ab.log = { text in } // to define your own log handler
 let duration = ab.lastOperationDuration // the duration of the last operation in seconds
 ```
 
-In debug mode you can see all actual tests and check how the user will see each option of the test. To call the debug menu you need to turn it on in your personal cabinet and make shake motion on your iPhone or simulator.
-In case you change your gesture to open debug menu, call it.
+In debug mode you can see all actual tests and check how the user will see each option of the test.
+To show the debug menu you just need to turn it on in your personal cabinet and call
+```
+AppboosterDebugMode.showMenu(from: <yourViewController>)
+```
+or you can inherit some of your `UIViewController`'s from `AppboosterShakeToDebugController` and just make shake motion on your iPhone or simulator.
 
-```
-AppboosterDebugMode.showMenu(from: <yourViewController>) // by default is displayed from any view controller 
-```
+
 
 ==================================================
 

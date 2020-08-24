@@ -20,7 +20,6 @@
 		3E2EAFE824C96880001643BD /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EAFE224C96880001643BD /* State.swift */; };
 		3E2EAFEC24C98CF0001643BD /* AppboosterExperiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EAFEB24C98CF0001643BD /* AppboosterExperiment.swift */; };
 		3E2EAFEE24C996BA001643BD /* ExperimentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EAFED24C996BA001643BD /* ExperimentsController.swift */; };
-		3E2EAFF024C9A4FA001643BD /* UIViewController+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EAFEF24C9A4FA001643BD /* UIViewController+Shake.swift */; };
 		3E2EAFF424CEBD9D001643BD /* JWTToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EAFF324CEBD9C001643BD /* JWTToken.swift */; };
 		3E2EAFF624CEDFAB001643BD /* AppboosterKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EAFF524CEDFAB001643BD /* AppboosterKeychain.swift */; };
 		3E2EAFF824CFFE33001643BD /* AppboosterExperimentOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EAFF724CFFE33001643BD /* AppboosterExperimentOption.swift */; };
@@ -33,6 +32,7 @@
 		3E80608724D43BEF009751D1 /* checkbox-fill.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E80608424D43BEF009751D1 /* checkbox-fill.png */; };
 		3EE5D17524D2925E007CC59A /* AppboosterExperimentValueMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE5D17424D2925E007CC59A /* AppboosterExperimentValueMeta.swift */; };
 		3EE5D17724D29315007CC59A /* AppboosterExperimentStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE5D17624D29315007CC59A /* AppboosterExperimentStatus.swift */; };
+		432970BC24F3A154006BBD9D /* AppboosterShakeToDebugController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432970BB24F3A154006BBD9D /* AppboosterShakeToDebugController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,7 +51,6 @@
 		3E2EAFE224C96880001643BD /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = State.swift; path = AppboosterSDK/Classes/State.swift; sourceTree = SOURCE_ROOT; };
 		3E2EAFEB24C98CF0001643BD /* AppboosterExperiment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppboosterExperiment.swift; path = AppboosterSDK/Classes/AppboosterExperiment.swift; sourceTree = SOURCE_ROOT; };
 		3E2EAFED24C996BA001643BD /* ExperimentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExperimentsController.swift; path = AppboosterSDK/Classes/ExperimentsController.swift; sourceTree = SOURCE_ROOT; };
-		3E2EAFEF24C9A4FA001643BD /* UIViewController+Shake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+Shake.swift"; path = "AppboosterSDK/Classes/UIViewController+Shake.swift"; sourceTree = SOURCE_ROOT; };
 		3E2EAFF324CEBD9C001643BD /* JWTToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JWTToken.swift; path = AppboosterSDK/Classes/JWTToken.swift; sourceTree = SOURCE_ROOT; };
 		3E2EAFF524CEDFAB001643BD /* AppboosterKeychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppboosterKeychain.swift; path = AppboosterSDK/Classes/AppboosterKeychain.swift; sourceTree = SOURCE_ROOT; };
 		3E2EAFF724CFFE33001643BD /* AppboosterExperimentOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppboosterExperimentOption.swift; path = AppboosterSDK/Classes/AppboosterExperimentOption.swift; sourceTree = SOURCE_ROOT; };
@@ -64,6 +63,7 @@
 		3E80608424D43BEF009751D1 /* checkbox-fill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkbox-fill.png"; path = "AppboosterSDK/Assets/checkbox-fill.png"; sourceTree = SOURCE_ROOT; };
 		3EE5D17424D2925E007CC59A /* AppboosterExperimentValueMeta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppboosterExperimentValueMeta.swift; path = AppboosterSDK/Classes/AppboosterExperimentValueMeta.swift; sourceTree = SOURCE_ROOT; };
 		3EE5D17624D29315007CC59A /* AppboosterExperimentStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppboosterExperimentStatus.swift; path = AppboosterSDK/Classes/AppboosterExperimentStatus.swift; sourceTree = SOURCE_ROOT; };
+		432970BB24F3A154006BBD9D /* AppboosterShakeToDebugController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppboosterShakeToDebugController.swift; path = AppboosterSDK/Classes/AppboosterShakeToDebugController.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,11 +132,11 @@
 				3E2EAFE124C96880001643BD /* AppboosterExperimentValue.swift */,
 				3EE5D17424D2925E007CC59A /* AppboosterExperimentValueMeta.swift */,
 				3E2EAFF924CFFE3D001643BD /* AppboosterExperimentsValuesResponse.swift */,
+				432970BB24F3A154006BBD9D /* AppboosterShakeToDebugController.swift */,
 				3E2EB01224D1B66D001643BD /* ExperimentsCell.swift */,
 				3E2EAFED24C996BA001643BD /* ExperimentsController.swift */,
 				3E2EAFF324CEBD9C001643BD /* JWTToken.swift */,
 				3E2EAFE224C96880001643BD /* State.swift */,
-				3E2EAFEF24C9A4FA001643BD /* UIViewController+Shake.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -226,8 +226,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E2EB01324D1B66D001643BD /* ExperimentsCell.swift in Sources */,
+				432970BC24F3A154006BBD9D /* AppboosterShakeToDebugController.swift in Sources */,
 				3E2EAFEE24C996BA001643BD /* ExperimentsController.swift in Sources */,
-				3E2EAFF024C9A4FA001643BD /* UIViewController+Shake.swift in Sources */,
 				3E2EAFE324C96880001643BD /* AppboosterSDK.swift in Sources */,
 				3E2EAFFA24CFFE3D001643BD /* AppboosterExperimentsValuesResponse.swift in Sources */,
 				3E2EAFE424C96880001643BD /* AnyCodable.swift in Sources */,
@@ -389,7 +389,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YY7V82P89Q;
+				DEVELOPMENT_TEAM = D397U8YR3X;
 				INFOPLIST_FILE = AppboosterSDKExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -408,7 +408,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YY7V82P89Q;
+				DEVELOPMENT_TEAM = D397U8YR3X;
 				INFOPLIST_FILE = AppboosterSDKExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
