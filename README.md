@@ -63,6 +63,9 @@ In case of problems with no internet connection or another, the values obtained 
 
 ```
 let experiments = ab.experiments
+
+// i.e. set Amplitude user properties
+Amplitude.instance().setUserProperties(experiments);
 ```
 
 You can disable the sending of events to analytics if debug mode is turn on.
