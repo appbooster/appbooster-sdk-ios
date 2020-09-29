@@ -210,14 +210,10 @@ public final class AppboosterSDK: NSObject {
     return value(key)
   }
 
-  public var experiments: [String: Any] {
-    var experiments: [String: Any] = [:]
-
-    for experimentValue in experimentsValues {
-      experiments[experimentValue.key] = experimentValue.value.value
-    }
-
-    return experiments
+  public func experiments(addAppboosterPrefix: Bool) -> [String: Any] {
+    Dictionary(uniqueKeysWithValues: experimentsValues.map {
+      ($0.userKey(addAppboosterPrefix: addAppboosterPrefix), $0.value.value)
+    })
   }
 
   // MARK: Service
