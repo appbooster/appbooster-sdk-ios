@@ -11,4 +11,8 @@ import Foundation
 struct AppboosterExperimentValue: Codable {
   let key: String
   let value: AnyCodable
+
+  func userKey(addAppboosterPrefix: Bool) -> String {
+    addAppboosterPrefix ? "[Appbooster] \(key)" : key
+  }
 }
