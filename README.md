@@ -59,14 +59,16 @@ let value: String? = ab.value("<TEST_KEY>")
 
 In case of problems with no internet connection or another, the values obtained in the previous session will be used, or if they are missing, the default values specified during initialization will be used.
 
-### How to get user tests for analytics?
+### How to get user tests for analytics?   
 
-```
-let experiments = ab.experiments
+``` 
+let experiments = ab.experiments(addAppboosterPrefix: true)
 
 // i.e. set Amplitude user properties
 Amplitude.instance().setUserProperties(experiments);
 ```
+
+where `addAppboosterPrefix: Bool` used to add *[Appbooster]* prefix to experiments' keys.
 
 You can disable the sending of events to analytics if debug mode is turn on.
 
