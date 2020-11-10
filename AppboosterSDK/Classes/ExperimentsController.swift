@@ -123,7 +123,7 @@ class ExperimentsController: UITableViewController {
     if let index = State.debugExperimentsValues.firstIndex(where: { experimentValue in experimentValue.key == experiment.key }) {
       State.debugExperimentsValues.remove(at: index)
     }
-    let experimentValue = AppboosterExperimentValue(key: experiment.key, value: experiment.options[indexPath.row].value)
+    let experimentValue = AppboosterExperimentValue(key: experiment.key, value: experiment.options[indexPath.row].value, optionId: nil)
     State.debugExperimentsValues.append(experimentValue)
 
     tableView.deselectRow(at: indexPath, animated: true)
