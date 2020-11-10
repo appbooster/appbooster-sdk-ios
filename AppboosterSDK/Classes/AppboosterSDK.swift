@@ -29,7 +29,7 @@ public final class AppboosterSDK: NSObject {
     self.knownKeys = Array(defaults.keys)
 
     defaultExperimentsValues = defaults.compactMap { key, value in
-      AppboosterExperimentValue(key: key, value: value as? AnyCodable ?? "")
+      AppboosterExperimentValue(key: key, value: value as? AnyCodable ?? "", optionId: nil)
     }
 
     self.deviceId = deviceId
@@ -210,10 +210,17 @@ public final class AppboosterSDK: NSObject {
     return value(key)
   }
 
-  public func experiments(addAppboosterPrefix: Bool) -> [String: Any] {
+  public func experiments() -> [String: Any] {
     Dictionary(uniqueKeysWithValues: experimentsValues.map {
-      ($0.userKey(addAppboosterPrefix: addAppboosterPrefix), $0.value.value)
+      ($0.key, $0.value.value)
     })
+  }
+
+  public func experimentsWithDetails() -> [String: Any] {
+    var dict = [String: Any]()
+    experimentsValues.forEach { experiment in dict.merge(experiment.details) { (v1, v2) in v1 } }
+
+    return dict
   }
 
   // MARK: Service
