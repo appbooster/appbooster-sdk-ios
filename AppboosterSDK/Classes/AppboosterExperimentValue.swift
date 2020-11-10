@@ -15,6 +15,6 @@ struct AppboosterExperimentValue: Codable {
 
   var details: [String: Any] {
     ["[Appbooster] \(key)": value.value,
-     "[Appbooster] [internal] \(key)": optionId ?? "null"]
+     "[Appbooster] [internal] \(key)": optionId ?? ""]
   }
 }
