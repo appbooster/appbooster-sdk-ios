@@ -22,7 +22,7 @@ public struct JWTToken {
     ]
     let payload: [String: Any] = [
       "deviceId": deviceId,
-      "appsflyerId": appsFlyerId ?? ""
+      "appsFlyerId": appsFlyerId ?? ""
     ]
 
     guard let jsonHeader = try? JSONSerialization.data(withJSONObject: header, options: []),
