@@ -15,17 +15,20 @@ public final class AppboosterSDK: NSObject {
   private let sdkToken: String
   private let appId: String
   private let deviceId: String
+  private let appsFlyerId: String?
   private let knownKeys: [String]
 
   public init(
     sdkToken: String,
     appId: String,
     deviceId: String? = nil,
+    appsFlyerId: String? = nil,
     usingShake: Bool = true,
     defaults: [String: Any]
   ) {
     self.sdkToken = sdkToken
     self.appId = appId
+    self.appsFlyerId = appsFlyerId
     self.knownKeys = Array(defaults.keys)
 
     defaultExperimentsValues = defaults.compactMap { key, value in
@@ -122,7 +125,7 @@ public final class AppboosterSDK: NSObject {
   }
 
   private func createHeaders() -> [String: String] {
-    let token = JWTToken.generate(deviceId: deviceId, sdkToken: sdkToken) ?? ""
+    let token = JWTToken.generate(deviceId: deviceId, appsFlyerId: appsFlyerId, sdkToken: sdkToken) ?? ""
     let headers = [
       "Content-Type": "application/json",
       "Authorization": "Bearer \(token)",

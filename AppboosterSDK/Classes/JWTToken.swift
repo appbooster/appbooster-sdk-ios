@@ -13,6 +13,7 @@ public struct JWTToken {
 
   public static func generate(
     deviceId: String,
+    appsFlyerId: String?,
     sdkToken: String
   ) -> String? {
     let header: [String: Any] = [
@@ -20,7 +21,8 @@ public struct JWTToken {
       "typ": "JWT"
     ]
     let payload: [String: Any] = [
-      "deviceId": deviceId
+      "deviceId": deviceId,
+      "appsflyerId": appsFlyerId ?? ""
     ]
 
     guard let jsonHeader = try? JSONSerialization.data(withJSONObject: header, options: []),
