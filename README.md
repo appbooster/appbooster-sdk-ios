@@ -63,10 +63,10 @@ In case of problems with no internet connection or another, the values obtained 
 ### How to get user tests for analytics?   
 
 ``` 
-let experiments = ab.experiments()
+let experiments = ab.experimentsWithDetails()
 
-// or if you need tech details
-// let experiments = ab.experimentsWithDetails()
+// or if you need experiments without tech details
+// let experiments = ab.experiments()
 
 // i.e. set Amplitude user properties
 Amplitude.instance().setUserProperties(experiments);
