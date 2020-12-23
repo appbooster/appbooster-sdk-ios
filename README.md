@@ -60,9 +60,9 @@ let value: String? = ab.value("<TEST_KEY>")
 
 In case of problems with no internet connection or another, the values obtained in the previous session will be used, or if they are missing, the default values specified during initialization will be used.
 
-### How to get user tests for analytics?   
+### How to get user tests for analytics?
 
-``` 
+```
 let experiments = ab.experiments()
 
 // or if you need tech details
@@ -71,8 +71,6 @@ let experiments = ab.experiments()
 // i.e. set Amplitude user properties
 Amplitude.instance().setUserProperties(experiments);
 ```
-
-where `addAppboosterPrefix: Bool` used to add *[Appbooster]* prefix to experiments' keys.
 
 You can disable the sending of events to analytics if debug mode is turn on.
 
@@ -86,7 +84,7 @@ if AppboosterDebugMode.isOn {
 
 Before debug make sure that debug-mode for your App is turned-on on [settings page](https://platform.appbooster.com/ab/settings)
 
-  ![](https://imgproxy.appbooster.com/9ACImnEbmsO822dynjTjcC_B8aXzbbpPQsOgop2PlBs//aHR0cHM6Ly9hcHBib29zdGVyLWNsb3VkLnMzLmV1LWNlbnRyYWwtMS5hbWF6b25hd3MuY29tLzk0N2M5NzdmLTAwY2EtNDA1Yi04OGQ4LTAzOTM4ZjY4OTAzYi5wbmc.png)
+![](https://imgproxy.appbooster.com/9ACImnEbmsO822dynjTjcC_B8aXzbbpPQsOgop2PlBs//aHR0cHM6Ly9hcHBib29zdGVyLWNsb3VkLnMzLmV1LWNlbnRyYWwtMS5hbWF6b25hd3MuY29tLzk0N2M5NzdmLTAwY2EtNDA1Yi04OGQ4LTAzOTM4ZjY4OTAzYi5wbmc.png)
 
 ```
 ab.showDebug = true // false by default, to print all debugging info in the console
@@ -96,12 +94,12 @@ let duration = ab.lastOperationDuration // the duration of the last operation in
 
 In debug mode you can see all actual tests and check how the user will see each option of the test.
 To show the debug menu you just need to turn it on in your personal cabinet and call
+
 ```
 AppboosterDebugMode.showMenu(from: <yourViewController>)
 ```
+
 or you can inherit some of your `UIViewController`'s from `AppboosterShakeToDebugController` and just make shake motion on your iPhone or simulator.
-
-
 
 ==================================================
 
