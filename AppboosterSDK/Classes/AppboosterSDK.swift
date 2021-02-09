@@ -214,9 +214,17 @@ public final class AppboosterSDK: NSObject {
   }
 
   public func experiments() -> [String: Any] {
-    Dictionary(uniqueKeysWithValues: experimentsValues.map {
+    let experiments = Dictionary(uniqueKeysWithValues: experimentsValues.map {
       ($0.key, $0.value.value)
     })
+
+    guard AppboosterDebugMode.isOn else { return experiments }
+
+    let debugExperiments = Dictionary(uniqueKeysWithValues: debugExperimentsValues.map {
+      ($0.key, $0.value.value)
+    })
+
+    return experiments.merging(debugExperiments) { $1 }
   }
 
   public func experimentsWithDetails() -> [String: Any] {
