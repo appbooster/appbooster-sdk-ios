@@ -17,6 +17,8 @@ public final class AppboosterSDK: NSObject {
   private let deviceId: String
   private let appsFlyerId: String?
   private let knownKeys: [String]
+  private var fetchAllExperimentsObserver: NSObjectProtocol?
+  private var cachedTimeoutInterval: TimeInterval = 3.0
 
   public init(
     sdkToken: String,
@@ -42,6 +44,15 @@ public final class AppboosterSDK: NSObject {
     AppboosterDebugMode.usingShake = usingShake
 
     super.init()
+
+    fetchAllExperimentsObserver = NotificationCenter.default.addObserver(
+      forName: Notification.Name("FetchAllExperiments"),
+      object: nil,
+      queue: .main) { [weak self] _ in
+      guard let self = self else { return }
+
+      self.fetchAllExperiments(timeoutInterval: self.cachedTimeoutInterval)
+    }
   }
 
   private var experimentsValues: [AppboosterExperimentValue] = State.experimentsValues {
@@ -96,11 +107,7 @@ public final class AppboosterSDK: NSObject {
                   self.experimentsValues = experimentsValuesResponse.experiments
                   AppboosterDebugMode.isOn = experimentsValuesResponse.meta.debug
 
-                  if experimentsValuesResponse.meta.debug {
-                    self.fetchAllExperiments(timeoutInterval: timeoutInterval, completion: completion)
-                  } else {
-                    completion(nil)
-                  }
+                  completion(nil)
                 }
                 catch {
                   let abError = AppboosterABError(error: "Experiments values decoding error: \(error.localizedDescription)",
@@ -137,13 +144,13 @@ public final class AppboosterSDK: NSObject {
   }
 
   private func fetchAllExperiments(timeoutInterval: TimeInterval,
-                                   completion: @escaping (_ abError: AppboosterABError?) -> Void) {
+                                   completion: ((_ abError: AppboosterABError?) -> Void)? = nil) {
     guard let url = createUrl(path: API.optionsPath) else {
       let abError = AppboosterABError(error: "Invalid url", code: 0)
 
       debugAndLog("[AppboosterSDK] Fetch all experiments error – \(abError.error), error code: \(abError.code)")
 
-      completion(abError)
+      completion?(abError)
 
       return
     }
@@ -158,7 +165,7 @@ public final class AppboosterSDK: NSObject {
               if let abError = abError {
                 self.debugAndLog("[AppboosterSDK] Fetch all experiments error – \(abError.error), error code: \(abError.code)")
 
-                completion(abError)
+                completion?(abError)
               } else if let data = data {
                 do {
                   let experimentsResponse = try JSONDecoder().decode(AppboosterExperimentsResponse.self, from: data)
@@ -181,9 +188,13 @@ public final class AppboosterSDK: NSObject {
                     }
                   }
 
+                  if let observer = self.fetchAllExperimentsObserver {
+                    NotificationCenter.default.removeObserver(observer)
+                  }
+
                   NotificationCenter.default.post(name: Notification.Name("AllExperimentsReceived"), object: nil)
 
-                  completion(nil)
+                  completion?(nil)
                 }
                 catch {
                   let abError = AppboosterABError(error: "All experiments decoding error: \(error.localizedDescription)",
@@ -191,7 +202,7 @@ public final class AppboosterSDK: NSObject {
 
                   self.debugAndLog("[AppboosterSDK] Error – \(abError.error), error code: \(abError.code)")
 
-                  completion(abError)
+                  completion?(abError)
                 }
               }
     }

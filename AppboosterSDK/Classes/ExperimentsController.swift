@@ -54,8 +54,11 @@ class ExperimentsController: UITableViewController {
       queue: .main) { [weak self] notification in
         guard let self = self else { return }
 
+        self.experiments = State.experiments
         self.tableView.reloadData()
     }
+
+    NotificationCenter.default.post(name: Notification.Name("FetchAllExperiments"), object: nil)
   }
 
   override func viewWillDisappear(_ animated: Bool) {
