@@ -26,14 +26,14 @@ public final class AppboosterSDK: NSObject {
     appId: String,
     deviceId: String? = nil,
     appsFlyerId: String? = nil,
-    amplitudeDeviceId: String? = nil,
+    amplitudeUserId: String? = nil,
     usingShake: Bool = true,
     defaults: [String: Any]
   ) {
     self.sdkToken = sdkToken
     self.appId = appId
     self.appsFlyerId = appsFlyerId
-    self.amplitudeId = amplitudeDeviceId
+    self.amplitudeId = amplitudeUserId
     self.knownKeys = Array(defaults.keys)
 
     defaultExperimentsValues = defaults.compactMap { key, value in
