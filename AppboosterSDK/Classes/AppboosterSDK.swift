@@ -15,6 +15,7 @@ public final class AppboosterSDK: NSObject {
   private let sdkToken: String
   private let appId: String
   private let deviceId: String
+  private let deviceProperties: [String: Any]
   private let appsFlyerId: String?
   private let amplitudeId: String?
   private let knownKeys: [String]
@@ -25,6 +26,7 @@ public final class AppboosterSDK: NSObject {
     sdkToken: String,
     appId: String,
     deviceId: String? = nil,
+    deviceProperties: [String: Any] = [:],
     appsFlyerId: String? = nil,
     amplitudeUserId: String? = nil,
     usingShake: Bool = true,
@@ -43,6 +45,7 @@ public final class AppboosterSDK: NSObject {
     self.deviceId = deviceId
       ?? AppboosterKeychain.getDeviceId()
       ?? AppboosterKeychain.setNewDeviceId()
+    self.deviceProperties = deviceProperties
 
     AppboosterDebugMode.usingShake = usingShake
 
@@ -135,7 +138,7 @@ public final class AppboosterSDK: NSObject {
   }
 
   private func createHeaders() -> [String: String] {
-    let token = JWTToken.generate(deviceId: deviceId, appsFlyerId: appsFlyerId, amplitudeId: amplitudeId, sdkToken: sdkToken) ?? ""
+    let token = JWTToken.generate(deviceId: deviceId, deviceProperties: deviceProperties, appsFlyerId: appsFlyerId, amplitudeId: amplitudeId, sdkToken: sdkToken) ?? ""
     let headers = [
       "Content-Type": "application/json",
       "Authorization": "Bearer \(token)",

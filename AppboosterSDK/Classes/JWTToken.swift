@@ -13,6 +13,7 @@ public struct JWTToken {
 
   public static func generate(
     deviceId: String,
+    deviceProperties: [String: Any],
     appsFlyerId: String?,
     amplitudeId: String?,
     sdkToken: String
@@ -23,6 +24,7 @@ public struct JWTToken {
     ]
     let payload: [String: Any] = [
       "deviceId": deviceId,
+      "deviceProperties": deviceProperties,
       "appsFlyerId": appsFlyerId ?? "",
       "amplitudeId": amplitudeId ?? ""
     ]
